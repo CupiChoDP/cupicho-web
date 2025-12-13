@@ -1,7 +1,7 @@
 <!-- 
     CupiCho Membership Web App
-    Current Version: v25.04.41
-    Last Updated: 2025/01/07 (Added Admin Send Coupon Feature & Extra Coupons Display)
+    Current Version: v25.04.42
+    Last Updated: 2025/01/07 (Update Coupon Terms: Custom Red Text Logic for Americano & BOGO)
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -351,7 +351,7 @@
 
     <div id="root-container">
         <div id="login-page">
-            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入10碼電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.41</div></div>
+            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入10碼電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.42</div></div>
         </div>
         <div id="customer-home-page" class="hidden">
             <div class="customer-container">
@@ -395,7 +395,7 @@
                     <p class="info-main-data"><span id="voucher-balance">0</span><span class="small-text">杯</span></p>
                     <div class="action-buttons-group"><button class="btn btn-action" id="voucher-history-btn">寄杯查詢</button></div>
                 </div>
-                <div class="version-info">v25.04.41</div>
+                <div class="version-info">v25.04.42</div>
             </div>
         </div>
         
@@ -631,7 +631,7 @@
             // =============================================================
             // 2. 變數與常數宣告 (Variables & Constants) - 放在最上面
             // =============================================================
-            const APP_VERSION = 'v25.04.41';
+            const APP_VERSION = 'v25.04.42';
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK18jBS7tHbIKEd6lovkoi5BG3OM7wxWahw0fvgKSL_pP6OYa6c-4HsFlYdZoG5I/exec";
 
             const admins = {
@@ -653,9 +653,9 @@
             const LEVEL_THRESHOLDS = { LV1: 10, LV2: 20, LV3: 40 };
 
             const couponTerms = {
-                 'americano': ['晉升禮之飲品兌換限精品美式，不限內用/外帶，冰/熱不拘。', '會員晉升禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。', '此兌換卷恕不參與寄杯活動，需一次領取兩杯飲品。'],
+                 'americano': ['晉升禮之飲品兌換限精品美式，不限內用/外帶，冰/熱不拘。', '會員晉升禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'],
                  'rebate': ['排除88折(不含)以下折扣、買一送一、心動價、優惠商品、百貨聯名信用卡提供之折扣及相關集團優惠。', '會員回饋優惠券圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'],
-                 'bogo': ['不得再使用百貨聯名信用卡提供之折扣及相關集團優惠。', '不限內用/外帶，冰/熱不拘。', '會員飲品買一送一兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'],
+                 'bogo': ['不得再使用百貨聯名信用卡提供之折扣及相關集團優惠。', '不限內用/外帶，冰/熱不拘。', '會員飲品買一送一兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。', '此兌換卷恕不參與寄杯活動，需一次領取兩杯飲品。'],
                  'gold': ['可可金賞會員好禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。']
              };
 
@@ -911,7 +911,12 @@
                          const terms = couponTerms[type] || [];
                          let termsHtml = '<ul>';
                          terms.forEach((term, index) => {
-                             termsHtml += index === terms.length - 1 ? `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>` : `<li>${term}</li>`;
+                             // Check for red text conditions
+                             if (term.includes('處於「已使用」') || term.includes('此兌換卷恕不參與寄杯活動')) {
+                                 termsHtml += `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>`;
+                             } else {
+                                 termsHtml += `<li>${term}</li>`;
+                             }
                          });
                          document.getElementById('confirm-coupon-terms').innerHTML = termsHtml + '</ul>';
                          closeModal(document.getElementById('my-coupons-modal'));
