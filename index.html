@@ -1,7 +1,7 @@
 <!-- 
     CupiCho Membership Web App
-    Current Version: v25.04.46
-    Last Updated: 2025/01/07 (Added Batch Send Coupon by Membership Level)
+    Current Version: v25.04.47
+    Last Updated: 2025/01/07 (Hide Used Coupons & Term Fixes)
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -351,7 +351,7 @@
 
     <div id="root-container">
         <div id="login-page">
-            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入10碼電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.46</div></div>
+            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入10碼電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.47</div></div>
         </div>
         <div id="customer-home-page" class="hidden">
             <div class="customer-container">
@@ -395,7 +395,7 @@
                     <p class="info-main-data"><span id="voucher-balance">0</span><span class="small-text">杯</span></p>
                     <div class="action-buttons-group"><button class="btn btn-action" id="voucher-history-btn">寄杯查詢</button></div>
                 </div>
-                <div class="version-info">v25.04.46</div>
+                <div class="version-info">v25.04.47</div>
             </div>
         </div>
         
@@ -519,7 +519,7 @@
             </div>
         </div>
 
-        <!-- ★★★ 管理員派發優惠卷 Modal (更新版：含派發對象選擇) ★★★ -->
+        <!-- 管理員派發優惠卷 Modal -->
         <div id="admin-send-coupon-modal" class="modal-overlay hidden">
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal(document.getElementById('admin-send-coupon-modal'))">&times;</span>
@@ -661,7 +661,7 @@
             // =============================================================
             // 2. 變數與常數宣告 (Variables & Constants) - 放在最上面
             // =============================================================
-            const APP_VERSION = 'v25.04.46';
+            const APP_VERSION = 'v25.04.47';
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK18jBS7tHbIKEd6lovkoi5BG3OM7wxWahw0fvgKSL_pP6OYa6c-4HsFlYdZoG5I/exec";
 
             const admins = {
@@ -931,12 +931,16 @@
 
              function renderCouponItem(id, name, desc, img, type, container) {
                  const isUsed = globalUsedCoupons.includes(id);
+                 
+                 // FIX: 如果已使用，直接不顯示 (隱藏已核銷的優惠卷)
+                 if (isUsed) return;
+
                  const div = document.createElement('div');
                  div.className = 'coupon-item';
-                 const btnText = isUsed ? '已使用' : '使用';
-                 const btnClass = isUsed ? 'btn-use-coupon disabled' : 'btn-use-coupon';
-                 const disabledAttr = isUsed ? 'disabled' : '';
-                 const styleAttr = isUsed ? 'background-color:#ccc; cursor:default;' : '';
+                 const btnText = '使用'; // 因為不顯示已使用，所以這裡永遠是「使用」
+                 const btnClass = 'btn-use-coupon';
+                 const disabledAttr = '';
+                 const styleAttr = '';
 
                  div.innerHTML = `
                     <div class="coupon-img-container"><img src="${img}" class="coupon-img"></div>
@@ -946,24 +950,22 @@
                  container.appendChild(div);
                  
                  const btn = div.querySelector('button');
-                 if(!isUsed) {
-                     btn.addEventListener('click', () => {
-                         pendingCouponUseId = id;
-                         document.getElementById('confirm-coupon-img').src = img;
-                         const terms = couponTerms[type] || [];
-                         let termsHtml = '<ul>';
-                         terms.forEach((term, index) => {
-                             if (term.includes('處於「已使用」') || term.includes('此兌換卷恕不參與寄杯活動')) {
-                                 termsHtml += `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>`;
-                             } else {
-                                 termsHtml += `<li>${term}</li>`;
-                             }
-                         });
-                         document.getElementById('confirm-coupon-terms').innerHTML = termsHtml + '</ul>';
-                         closeModal(document.getElementById('my-coupons-modal'));
-                         openModal(document.getElementById('coupon-confirm-modal'));
+                 btn.addEventListener('click', () => {
+                     pendingCouponUseId = id;
+                     document.getElementById('confirm-coupon-img').src = img;
+                     const terms = couponTerms[type] || [];
+                     let termsHtml = '<ul>';
+                     terms.forEach((term, index) => {
+                         if (term.includes('處於「已使用」') || term.includes('此兌換卷恕不參與寄杯活動')) {
+                             termsHtml += `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>`;
+                         } else {
+                             termsHtml += `<li>${term}</li>`;
+                         }
                      });
-                 }
+                     document.getElementById('confirm-coupon-terms').innerHTML = termsHtml + '</ul>';
+                     closeModal(document.getElementById('my-coupons-modal'));
+                     openModal(document.getElementById('coupon-confirm-modal'));
+                 });
              }
 
 
@@ -1064,10 +1066,11 @@
             }
 
             function handleAdminSendCoupon() {
+                const phone = document.getElementById('send-coupon-phone').value.trim();
                 const typeSelect = document.getElementById('send-coupon-type');
-                const targetMode = document.getElementById('send-target-mode').value;
-                const qty = parseInt(document.getElementById('send-coupon-qty').value);
                 let type = typeSelect.value;
+                const qty = parseInt(document.getElementById('send-coupon-qty').value);
+                const targetMode = document.getElementById('send-target-mode').value;
                 
                 if (type === 'other') {
                     const customName = document.getElementById('send-coupon-custom-name').value.trim();
@@ -1078,7 +1081,6 @@
                 let payload = { action: 'sendCoupon', type: type, qty: qty, employeeId: currentAdminId, targetMode: targetMode };
 
                 if (targetMode === 'phone') {
-                    const phone = document.getElementById('send-coupon-phone').value.trim();
                     if (!phone || !/^\d{10}$/.test(phone)) { alert('請輸入正確電話'); return; }
                     payload.phone = phone;
                 } else {
