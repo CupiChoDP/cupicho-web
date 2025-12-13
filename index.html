@@ -1,7 +1,7 @@
 <!-- 
     CupiCho Membership Web App
-    Current Version: v25.04.40
-    Last Updated: 2025/01/07 (Enhanced Admin Lookup: Show Member Name & Level)
+    Current Version: v25.04.41
+    Last Updated: 2025/01/07 (Added Admin Send Coupon Feature & Extra Coupons Display)
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -351,7 +351,7 @@
 
     <div id="root-container">
         <div id="login-page">
-            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入10碼電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.40</div></div>
+            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入10碼電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.41</div></div>
         </div>
         <div id="customer-home-page" class="hidden">
             <div class="customer-container">
@@ -395,7 +395,7 @@
                     <p class="info-main-data"><span id="voucher-balance">0</span><span class="small-text">杯</span></p>
                     <div class="action-buttons-group"><button class="btn btn-action" id="voucher-history-btn">寄杯查詢</button></div>
                 </div>
-                <div class="version-info">v25.04.40</div>
+                <div class="version-info">v25.04.41</div>
             </div>
         </div>
         
@@ -519,10 +519,47 @@
             </div>
         </div>
 
+        <!-- 管理員派發優惠卷 Modal -->
+        <div id="admin-send-coupon-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal(document.getElementById('admin-send-coupon-modal'))">&times;</span>
+                <h2 class="modal-title">派發優惠卷</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="send-coupon-phone">會員電話</label>
+                        <input type="tel" id="send-coupon-phone" class="form-input" placeholder="請輸入會員電話">
+                    </div>
+                    <div class="form-group">
+                        <label for="send-coupon-type">優惠卷類型</label>
+                        <select id="send-coupon-type" class="form-input">
+                            <option value="">-- 請選擇 --</option>
+                            <option value="gift_americano">美式咖啡兌換卷</option>
+                            <option value="gift_bogo">飲品買一送一卷</option>
+                            <option value="coupon_5">5% 回饋優惠卷</option>
+                            <option value="coupon_10">10% 回饋優惠卷</option>
+                            <option value="gift_gold">金賞好禮兌換卷</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="send-coupon-qty">數量</label>
+                        <input type="number" id="send-coupon-qty" class="form-input" value="1" min="1" max="10">
+                    </div>
+                </div>
+                <button id="confirm-send-coupon-btn" class="btn btn-primary" style="margin-top:20px;">確認派發</button>
+            </div>
+        </div>
+
         <div id="admin-home-page" class="hidden">
             <div class="admin-container">
                 <div class="header-bar"><div class="greeting-text"><span id="admin-id-greeting"></span> <span id="admin-time-greeting">您好</span></div><button id="admin-logout-button" class="btn-logout">登出</button></div>
-                <div class="admin-actions"><button id="admin-add-voucher-btn" class="btn btn-secondary">新增寄杯</button><button id="admin-redeem-voucher-btn" class="btn btn-secondary">核銷寄杯</button></div>
+                <div class="admin-actions">
+                    <button id="admin-add-voucher-btn" class="btn btn-secondary">新增寄杯</button>
+                    <button id="admin-redeem-voucher-btn" class="btn btn-secondary">核銷寄杯</button>
+                </div>
+                <!-- 新增派發按鈕 -->
+                <div class="admin-actions" style="margin-top: 15px;">
+                    <button id="admin-send-coupon-btn" class="btn btn-primary" style="background-color: #4a2c2a; color: #fff;">派發優惠卷</button>
+                </div>
                 <div class="divider"></div>
                 <div class="lookup-section"><h3 class="section-title">會員資料查詢</h3><div class="lookup-form"><input type="tel" id="lookup-phone-input" class="form-input" placeholder="請輸入會員10碼電話號碼"><button id="lookup-button" class="btn btn-primary">查詢</button></div></div>
                 <div id="lookup-results" class="results-section hidden">
@@ -594,7 +631,7 @@
             // =============================================================
             // 2. 變數與常數宣告 (Variables & Constants) - 放在最上面
             // =============================================================
-            const APP_VERSION = 'v25.04.40';
+            const APP_VERSION = 'v25.04.41';
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK18jBS7tHbIKEd6lovkoi5BG3OM7wxWahw0fvgKSL_pP6OYa6c-4HsFlYdZoG5I/exec";
 
             const admins = {
@@ -602,6 +639,9 @@
                 '10425120': '5120 Elly', '10431938': '1938 Jewel', '10413569': '3569 Summer',
                 '10426630': '6630 Elaine'
             };
+            
+            // 允許派發優惠卷的管理員
+            const CAN_SEND_COUPON_ADMINS = ['10427091']; // Arno
 
             const redeemableItems = [
                 { cost: 2, name: "精品皮革收納籃", image: "item_2pt.png" },
@@ -613,31 +653,10 @@
             const LEVEL_THRESHOLDS = { LV1: 10, LV2: 20, LV3: 40 };
 
             const couponTerms = {
-                 'americano': [
-                     '晉升禮之飲品兌換限精品美式，不限內用/外帶，冰/熱不拘。',
-                     '會員晉升禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
-                     '其他注意事項及未盡事宜，請洽店內夥伴。',
-                     '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。',
-                     '此兌換卷恕不參與寄杯活動，需一次領取兩杯飲品。'
-                 ],
-                 'rebate': [
-                     '排除88折(不含)以下折扣、買一送一、心動價、優惠商品、百貨聯名信用卡提供之折扣及相關集團優惠。',
-                     '會員回饋優惠券圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
-                     '其他注意事項及未盡事宜，請洽店內夥伴。',
-                     '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
-                 ],
-                 'bogo': [
-                     '不得再使用百貨聯名信用卡提供之折扣及相關集團優惠。',
-                     '不限內用/外帶，冰/熱不拘。',
-                     '會員飲品買一送一兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
-                     '其他注意事項及未盡事宜，請洽店內夥伴。',
-                     '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
-                 ],
-                 'gold': [
-                     '可可金賞會員好禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
-                     '其他注意事項及未盡事宜，請洽店內夥伴。',
-                     '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
-                 ]
+                 'americano': ['晉升禮之飲品兌換限精品美式，不限內用/外帶，冰/熱不拘。', '會員晉升禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。', '此兌換卷恕不參與寄杯活動，需一次領取兩杯飲品。'],
+                 'rebate': ['排除88折(不含)以下折扣、買一送一、心動價、優惠商品、百貨聯名信用卡提供之折扣及相關集團優惠。', '會員回饋優惠券圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'],
+                 'bogo': ['不得再使用百貨聯名信用卡提供之折扣及相關集團優惠。', '不限內用/外帶，冰/熱不拘。', '會員飲品買一送一兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'],
+                 'gold': ['可可金賞會員好禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。', '其他注意事項及未盡事宜，請洽店內夥伴。', '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。']
              };
 
             let currentCustomerPhone = null;
@@ -652,10 +671,11 @@
             let currentAnnualPoints = 0; 
             let currentLevelIndex = 0; 
             let globalUsedCoupons = []; 
+            let globalExtraCoupons = []; // 新增：儲存派發的額外優惠卷
             let html5QrCodeScanner = null;
-            // FIX: 新增 isCouponsLoaded 變數
             let isCouponsLoaded = false; 
             const savedPhone = localStorage.getItem('cupicho_user_phone');
+            let currentAdminId = null; // 新增：記錄目前登入的管理員
             
             // 1. LINE 瀏覽器強制跳轉
             if (navigator.userAgent.indexOf("Line") > -1) {
@@ -750,6 +770,15 @@
                  return coupons;
             }
 
+            // 新增：整合等級卷與額外派發卷的計算
+            function getTotalCoupons() {
+                 let count = getUnusedCouponCount(currentLevelIndex);
+                 globalExtraCoupons.forEach(c => {
+                     if (!globalUsedCoupons.includes(c.id)) count++;
+                 });
+                 return count;
+            }
+
             function getUnusedCouponCount(levelIdx) {
                  const coupons = getCouponsForLevel(levelIdx);
                  let count = 0;
@@ -772,8 +801,7 @@
                  else if (p < LEVEL_THRESHOLDS.LV3) { currentLevelIndex = 2; levelClass = 'lv2-style'; levelName = '可可銀賞'; nextName = '可可金賞'; pointsNeeded = LEVEL_THRESHOLDS.LV3 - p; progressPercent = ((p - LEVEL_THRESHOLDS.LV2) / (LEVEL_THRESHOLDS.LV3 - LEVEL_THRESHOLDS.LV2)) * 100; }
                  else { currentLevelIndex = 3; levelClass = 'lv3-style'; levelName = '可可金賞'; nextName = '最高等級'; pointsNeeded = 0; progressPercent = 100; }
 
-                 // FIX: 在還沒載入雲端資料前，顯示 "-" 或 "..."
-                 const couponCountDisplay = isCouponsLoaded ? getUnusedCouponCount(currentLevelIndex) : "-";
+                 const couponCountDisplay = isCouponsLoaded ? getTotalCoupons() : "-";
                  const countEl = document.getElementById('modal-coupon-count');
                  if (countEl) countEl.textContent = couponCountDisplay;
 
@@ -790,7 +818,6 @@
                  document.getElementById('level-tooltip').textContent = pointsNeeded > 0 ? `差 ${pointsNeeded} 點晉升` : `已達最高等級`;
             }
 
-            // --- Window Exposed Functions for HTML onclick ---
             window.openMemberDetailModal = function() {
                  if(!currentCustomerPhone) return;
                  const p = currentAnnualPoints;
@@ -808,8 +835,7 @@
                  document.getElementById('modal-next-info').textContent = nextInfoText;
                  document.getElementById('modal-annual-value').textContent = p;
                  
-                 // FIX: 同樣套用載入中邏輯
-                 const couponCountDisplay = isCouponsLoaded ? getUnusedCouponCount(currentLevelIndex) : "-";
+                 const couponCountDisplay = isCouponsLoaded ? getTotalCoupons() : "-";
                  document.getElementById('modal-coupon-count').textContent = couponCountDisplay;
 
                  openModal(document.getElementById('member-detail-modal'));
@@ -820,57 +846,79 @@
                  const coupons = getCouponsForLevel(currentLevelIndex);
                  const listContainer = document.getElementById('coupons-list-container');
                  listContainer.innerHTML = '';
-                 let hasAnyCoupon = false;
-
-                 if(coupons.length === 0) {
-                     listContainer.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">目前沒有可用的優惠卷</p>';
-                 } else {
-                     coupons.forEach(couponGroup => {
-                         for(let i=0; i<couponGroup.qty; i++) {
-                             hasAnyCoupon = true;
-                             const uniqueId = `${couponGroup.baseId}_${i}`;
-                             const isUsed = globalUsedCoupons.includes(uniqueId);
-                             const div = document.createElement('div');
-                             div.className = 'coupon-item';
-                             const btnText = isUsed ? '已使用' : '使用';
-                             const btnClass = isUsed ? 'btn-use-coupon disabled' : 'btn-use-coupon';
-                             const disabledAttr = isUsed ? 'disabled' : '';
-                             const styleAttr = isUsed ? 'background-color:#ccc; cursor:default;' : '';
-
-                             div.innerHTML = `<div class="coupon-img-container"><img src="${couponGroup.img}" class="coupon-img"></div><div class="coupon-details"><span class="coupon-name">${couponGroup.name}</span><span class="coupon-desc">${couponGroup.desc}</span></div><div class="coupon-action"><button class="${btnClass}" ${disabledAttr} style="${styleAttr}" data-id="${uniqueId}" data-name="${couponGroup.name}" data-img="${couponGroup.img}" data-type="${couponGroup.type}">${btnText}</button></div>`;
-                             listContainer.appendChild(div);
-                         }
-                     });
+                 
+                 // 合併一般卷與額外派發卷
+                 // 額外卷格式轉換為顯示格式
+                 const extraDisplayList = globalExtraCoupons.map(c => {
+                     let imgMap = { 'gift_americano': 'gift_americano.png', 'gift_bogo': 'gift_bogo.png', 'coupon_5': 'coupon_5.png', 'coupon_10': 'coupon_10.png', 'gift_gold': 'gift_gold.png' };
+                     // 簡單對應類型到名稱
+                     let nameMap = { 'gift_americano': '美式咖啡兌換卷', 'gift_bogo': '飲品買一送一卷', 'coupon_5': '5% 回饋優惠卷', 'coupon_10': '10% 回饋優惠卷', 'gift_gold': '金賞好禮兌換卷' };
+                     // 對應類型到 term key
+                     let typeMap = { 'gift_americano': 'americano', 'gift_bogo': 'bogo', 'coupon_5': 'rebate', 'coupon_10': 'rebate', 'gift_gold': 'gold' };
                      
-                     if (!hasAnyCoupon) { listContainer.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">目前沒有可用的優惠卷</p>'; }
+                     return {
+                         id: c.id,
+                         name: nameMap[c.type] || '專屬優惠卷',
+                         desc: '專屬派發',
+                         img: imgMap[c.type] || 'gift_gold.png',
+                         type: typeMap[c.type] || 'gold',
+                         isExtra: true
+                     };
+                 });
 
-                     listContainer.querySelectorAll('.btn-use-coupon:not(:disabled)').forEach(btn => {
-                         btn.addEventListener('click', (e) => {
-                             const couponId = e.target.getAttribute('data-id');
-                             const couponImg = e.target.getAttribute('data-img');
-                             const couponType = e.target.getAttribute('data-type');
-                             
-                             pendingCouponUseId = couponId;
-                             document.getElementById('confirm-coupon-img').src = couponImg;
-                             
-                             const termsContainer = document.getElementById('confirm-coupon-terms');
-                             const terms = couponTerms[couponType] || [];
-                             let termsHtml = '<ul>';
-                             terms.forEach((term, index) => {
-                                 if (index === terms.length - 1) {
-                                     termsHtml += `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>`;
-                                 } else {
-                                     termsHtml += `<li>${term}</li>`;
-                                 }
-                             });
-                             document.getElementById('confirm-coupon-terms').innerHTML = termsHtml + '</ul>';
-                             closeModal(document.getElementById('my-coupons-modal'));
-                             openModal(document.getElementById('coupon-confirm-modal'));
-                         });
-                     });
+                 // Render Normal Coupons
+                 coupons.forEach(couponGroup => {
+                     for(let i=0; i<couponGroup.qty; i++) {
+                         const uniqueId = `${couponGroup.baseId}_${i}`;
+                         renderCouponItem(uniqueId, couponGroup.name, couponGroup.desc, couponGroup.img, couponGroup.type, listContainer);
+                     }
+                 });
+
+                 // Render Extra Coupons
+                 extraDisplayList.forEach(extra => {
+                     renderCouponItem(extra.id, extra.name, extra.desc, extra.img, extra.type, listContainer);
+                 });
+
+                 if (listContainer.children.length === 0) {
+                    listContainer.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">目前沒有可用的優惠卷</p>';
                  }
+
                  openModal(document.getElementById('my-coupons-modal'));
              };
+
+             function renderCouponItem(id, name, desc, img, type, container) {
+                 const isUsed = globalUsedCoupons.includes(id);
+                 const div = document.createElement('div');
+                 div.className = 'coupon-item';
+                 const btnText = isUsed ? '已使用' : '使用';
+                 const btnClass = isUsed ? 'btn-use-coupon disabled' : 'btn-use-coupon';
+                 const disabledAttr = isUsed ? 'disabled' : '';
+                 const styleAttr = isUsed ? 'background-color:#ccc; cursor:default;' : '';
+
+                 div.innerHTML = `
+                    <div class="coupon-img-container"><img src="${img}" class="coupon-img"></div>
+                    <div class="coupon-details"><span class="coupon-name">${name}</span><span class="coupon-desc">${desc}</span></div>
+                    <div class="coupon-action"><button class="${btnClass}" ${disabledAttr} style="${styleAttr}" data-id="${id}" data-name="${name}" data-img="${img}" data-type="${type}">${btnText}</button></div>
+                 `;
+                 container.appendChild(div);
+                 
+                 // Bind individual click
+                 const btn = div.querySelector('button');
+                 if(!isUsed) {
+                     btn.addEventListener('click', () => {
+                         pendingCouponUseId = id;
+                         document.getElementById('confirm-coupon-img').src = img;
+                         const terms = couponTerms[type] || [];
+                         let termsHtml = '<ul>';
+                         terms.forEach((term, index) => {
+                             termsHtml += index === terms.length - 1 ? `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>` : `<li>${term}</li>`;
+                         });
+                         document.getElementById('confirm-coupon-terms').innerHTML = termsHtml + '</ul>';
+                         closeModal(document.getElementById('my-coupons-modal'));
+                         openModal(document.getElementById('coupon-confirm-modal'));
+                     });
+                 }
+             }
 
 
             // --- Logic Functions ---
@@ -880,16 +928,22 @@
                 if (!input) { alert('請輸入電話號碼或員編'); return; }
 
                 if (admins[input]) {
+                    currentAdminId = input; // 紀錄管理員ID
                     showPage(document.getElementById('admin-home-page'));
                     updateGreeting('admin-time-greeting', 'admin-id-greeting', admins[input]);
                     document.getElementById('lookup-results').classList.add('hidden');
+                    // 檢查是否顯示派發按鈕
+                    const sendBtn = document.getElementById('admin-send-coupon-btn');
+                    if(sendBtn) {
+                        if (CAN_SEND_COUPON_ADMINS.includes(input)) sendBtn.style.display = 'inline-block';
+                        else sendBtn.style.display = 'none';
+                    }
                     return;
                 }
 
                 if (!/^\d{10}$/.test(input)) { alert('電話號碼格式錯誤'); return; }
 
                 showLoader();
-                // FIX: 登入時重置載入狀態
                 isCouponsLoaded = false;
                 
                 fetch(`${SCRIPT_URL}?action=query&phone=${input}`)
@@ -898,7 +952,6 @@
                         hideLoader();
                         if (result.status === 'success') {
                             if (result.found) {
-                                // ★★★ FIX: 只有當找到會員資料時才進行登入邏輯 ★★★
                                 localStorage.setItem('cupicho_user_phone', result.data.phone);
                                 currentCustomerPhone = result.data.phone;
                                 currentCustomerInfo = { lastName: result.data.lastName, title: result.data.title };
@@ -906,37 +959,24 @@
                                 updateGreeting('customer-time-greeting', 'customer-name-greeting', result.data.lastName + result.data.title);
                                 if(document.getElementById('points-balance')) document.getElementById('points-balance').textContent = result.data.points;
                                 if(document.getElementById('voucher-balance')) document.getElementById('voucher-balance').textContent = result.data.vouchers;
-                                
-                                // 更新一次 UI (此時優惠卷會顯示 -)
                                 updateMemberLevelUI(result.data.annualPoints);
-                                // 開始抓取雲端資料
-                                fetchUsedCoupons(); 
+                                fetchCouponData(); // Fetch Used & Extra
                             } else {
-                                // ★★★ FIX: 如果是新用戶，跳轉到註冊頁面並帶入電話 ★★★
                                 const regPhoneEl = document.getElementById('reg-phone');
                                 if(regPhoneEl) regPhoneEl.value = input;
                                 openModal(document.getElementById('register-modal'));
                             }
-                        } else {
-                            // 如果後端回傳其他錯誤
-                            alert('⚠️ 系統錯誤：' + (result.message || '未知錯誤'));
-                        }
+                        } else { alert('⚠️ 系統錯誤：' + (result.message || '未知錯誤')); }
                     })
-                    .catch(err => {
-                        hideLoader();
-                        console.error("Login error:", err);
-                        alert('🚫 網路或伺服器錯誤');
-                    });
+                    .catch(err => { hideLoader(); alert('🚫 網路或伺服器錯誤'); });
             }
 
             function handleRegister() {
                 const phone = document.getElementById('reg-phone').value.trim();
                 const lastName = document.getElementById('reg-lastname').value.trim();
                 const title = document.getElementById('reg-title').value;
-
                 if (!/^\d{10}$/.test(phone)) { alert('電話號碼格式錯誤'); return; }
                 if (!lastName) { alert('請輸入姓氏'); return; }
-
                 const regData = { action: 'register', phone, lastName, title };
                 showLoader();
                 fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(regData) })
@@ -960,21 +1000,59 @@
             
             function logout() { localStorage.removeItem('cupicho_user_phone'); window.location.reload(); }
             
-            function fetchUsedCoupons() {
+            // ★★★ 新增：整合獲取已使用與額外優惠卷 ★★★
+            function fetchCouponData() {
                  if (!currentCustomerPhone) return;
-                 console.log("Fetching used coupons...");
+                 console.log("Fetching coupon data...");
+                 // 改為呼叫新API (若後端未更新，需兼容舊版)
+                 // 先嘗試使用 getUsedCoupons，若後端已更新支援 getCustomerCoupons 更好，但為求穩定先用擴充邏輯
+                 // 我們假設後端 getUsedCoupons 會回傳 { status:'success', data: [usedIDs], extra: [extraCoupons] }
+                 // 或者我們分兩次呼叫? 為了效能最好一次。
+                 // 這裡我們沿用 getUsedCoupons 但期望後端會給 extra 欄位 (需更新後端)
+                 
                  fetch(`${SCRIPT_URL}?action=getUsedCoupons&phone=${currentCustomerPhone}`)
                  .then(r => r.json())
                  .then(res => {
                      if (res.status === 'success') {
-                         globalUsedCoupons = res.data; 
-                         console.log("Used coupons fetched:", globalUsedCoupons);
-                         // FIX: 資料回來後，標記已載入並更新 UI
+                         globalUsedCoupons = res.data || []; 
+                         globalExtraCoupons = res.extra || []; // 獲取額外派發卷
                          isCouponsLoaded = true;
                          updateMemberLevelUI(currentAnnualPoints);
                      }
                  })
                  .catch(err => console.error("Fetch coupons error:", err));
+            }
+
+            // ★★★ 新增：管理員派發邏輯 ★★★
+            function handleAdminSendCoupon() {
+                const phone = document.getElementById('send-coupon-phone').value.trim();
+                const type = document.getElementById('send-coupon-type').value;
+                const qty = parseInt(document.getElementById('send-coupon-qty').value);
+                
+                if (!phone || !/^\d{10}$/.test(phone)) { alert('請輸入正確電話'); return; }
+                if (!type) { alert('請選擇優惠卷類型'); return; }
+                if (!qty || qty < 1) { alert('請輸入數量'); return; }
+                
+                showLoader();
+                fetch(SCRIPT_URL, { 
+                    method: 'POST', 
+                    body: JSON.stringify({ 
+                        action: 'sendCoupon', 
+                        phone: phone, 
+                        type: type, 
+                        qty: qty, 
+                        employeeId: currentAdminId 
+                    }) 
+                })
+                .then(r => r.json())
+                .then(res => {
+                    hideLoader();
+                    if(res.status === 'success') {
+                        alert('✅ 派發成功！');
+                        closeModal(document.getElementById('admin-send-coupon-modal'));
+                    } else { alert('⚠️ 派發失敗：' + res.message); }
+                })
+                .catch(() => { hideLoader(); alert('連線錯誤'); });
             }
             
             function fetchAndShowPointsHistory(phone) { 
@@ -1161,7 +1239,6 @@
              
              function closeQRScanner() { if (html5QrCodeScanner) { html5QrCodeScanner.stop().then(() => { document.getElementById('qr-reader-container').classList.add('hidden'); }); } else { document.getElementById('qr-reader-container').classList.add('hidden'); } }
 
-             // ★★★ FIX: Admin Lookup Logic ★★★
              function handleAdminLookup() {
                 const phone = document.getElementById('lookup-phone-input').value.trim();
                 if (!/^\d{10}$/.test(phone)) { alert('電話號碼格式錯誤'); return; }
@@ -1172,11 +1249,9 @@
                         if (result.found) {
                             searchedPhone = result.data;
                             
-                            // 更新會員姓名與稱謂
                             const nameDisplay = document.getElementById('result-name-display');
                             if(nameDisplay) nameDisplay.textContent = `${result.data.lastName}${result.data.title}`;
                             
-                            // 計算並更新會員等級
                             const ap = parseInt(result.data.annualPoints) || 0;
                             let levelName = '可可白賞';
                             if (ap >= LEVEL_THRESHOLDS.LV3) levelName = '可可金賞';
@@ -1192,7 +1267,7 @@
                         } else {
                             searchedPhone = null;
                             document.getElementById('lookup-results').classList.add('hidden');
-                            alert('查無此會員資料。'); // Show alert for non-members
+                            alert('查無此會員資料。'); 
                         }
                     } else { 
                         searchedPhone = null; 
@@ -1307,6 +1382,15 @@
                 document.getElementById('lookup-button').addEventListener('click', handleAdminLookup);
                 document.getElementById('admin-add-voucher-btn').addEventListener('click', openAddVoucherModal);
                 document.getElementById('admin-redeem-voucher-btn').addEventListener('click', () => openModal(document.getElementById('admin-verify-code-modal')));
+                // 新增派發按鈕綁定
+                const sendCouponBtn = document.getElementById('admin-send-coupon-btn');
+                if(sendCouponBtn) sendCouponBtn.addEventListener('click', () => {
+                    document.getElementById('send-coupon-phone').value = '';
+                    document.getElementById('send-coupon-type').value = '';
+                    document.getElementById('send-coupon-qty').value = '1';
+                    openModal(document.getElementById('admin-send-coupon-modal'));
+                });
+                
                 document.getElementById('admin-voucher-history-btn').addEventListener('click', () => {
                     if (searchedPhone && searchedPhone.phone) fetchAndShowVoucherHistory(searchedPhone.phone, {lastName: searchedPhone.lastName, title: searchedPhone.title}, 'admin');
                     else alert('請先查詢會員資料');
@@ -1326,6 +1410,10 @@
                 document.getElementById('verify-redeem-code-btn').addEventListener('click', handleVerifyRedeemCode);
                 document.getElementById('cancel-redeem-btn').addEventListener('click', () => closeModal(document.getElementById('admin-confirm-redeem-modal')));
                 document.getElementById('final-confirm-redeem-btn').addEventListener('click', handleFinalConfirmRedeem);
+
+                // Send Coupon Modal
+                const confirmSendCouponBtn = document.getElementById('confirm-send-coupon-btn');
+                if(confirmSendCouponBtn) confirmSendCouponBtn.addEventListener('click', handleAdminSendCoupon);
 
                 document.getElementById('cancel-point-redeem-btn').addEventListener('click', () => {
                     closeModal(document.getElementById('point-redeem-confirm-modal'));
