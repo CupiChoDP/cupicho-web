@@ -1,7 +1,7 @@
 <!-- 
     CupiCho Membership Web App
-    Current Version: v25.04.50
-    Last Updated: 2025/01/07 (Update Login Placeholder & Verify Coupon Quantities)
+    Current Version: v25.04.51
+    Last Updated: 2025/01/07 (Add Year to Coupon ID for Annual Reset)
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -334,7 +334,7 @@
         <linearGradient id="grad-bronze" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#B87333; stop-opacity:1" />
           <stop offset="40%" style="stop-color:#E8A87C; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#8B4513; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#B8860B; stop-opacity:1" />
         </linearGradient>
         <linearGradient id="grad-silver" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#A9A9A9; stop-opacity:1" />
@@ -351,7 +351,7 @@
 
     <div id="root-container">
         <div id="login-page">
-            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.50</div></div>
+            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.51</div></div>
         </div>
         <div id="customer-home-page" class="hidden">
             <div class="customer-container">
@@ -395,7 +395,7 @@
                     <p class="info-main-data"><span id="voucher-balance">0</span><span class="small-text">杯</span></p>
                     <div class="action-buttons-group"><button class="btn btn-action" id="voucher-history-btn">寄杯查詢</button></div>
                 </div>
-                <div class="version-info">v25.04.50</div>
+                <div class="version-info">v25.04.51</div>
             </div>
         </div>
         
@@ -661,8 +661,12 @@
             // =============================================================
             // 2. 變數與常數宣告 (Variables & Constants) - 放在最上面
             // =============================================================
-            const APP_VERSION = 'v25.04.50';
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK18jBS7tHbIKEd6lovkoi5BG3OM7wxWahw0fvgKSL_pP6OYa6c-4HsFlYdZoG5I/exec"
+            const APP_VERSION = 'v25.04.51';
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK18jBS7tHbIKEd6lovkoi5BG3OM7wxWahw0fvgKSL_pP6OYa6c-4HsFlYdZoG5I/exec";
+
+            // ★★★ 新增：年度變數 (用於優惠卷 ID 每年重置) ★★★
+            const currentYear = new Date().getFullYear();
+
             const admins = {
                 '10427091': '7091 Arno', '10431118': '1118 Carol', '10416377': '6377 Eric',
                 '10425120': '5120 Elly', '10431938': '1938 Jewel', '10413569': '3569 Summer',
@@ -678,7 +682,6 @@
                 { cost: 10, name: "精品禮盒", image: "item_10pt.png" }
             ];
 
-            // FIX: 使用 encodeURIComponent 解決中文編碼問題
             const svgContent = `<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg">
                   <rect x="5" y="5" width="110" height="110" rx="15" ry="15" fill="none" stroke="#DAA520" stroke-width="3"/>
                   <text x="50%" y="42" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="#DAA520" font-weight="bold" font-family="'Microsoft JhengHei', 'Heiti TC', sans-serif">專屬</text>
@@ -836,7 +839,9 @@
                  let count = 0;
                  coupons.forEach(group => {
                      for(let i=0; i<group.qty; i++) {
-                         if (!globalUsedCoupons.includes(`${group.baseId}_${i}`)) count++;
+                         // ★★★ FIX: 加入年份，確保每年重置 ★★★
+                         const uniqueId = `${group.baseId}_${currentYear}_${i}`;
+                         if (!globalUsedCoupons.includes(uniqueId)) count++;
                      }
                  });
                  return count;
@@ -863,7 +868,14 @@
                  document.getElementById('member-card-stars').innerHTML = getStarHtml(currentLevelIndex);
                  document.getElementById('current-level-name').textContent = levelName;
                  document.getElementById('current-level-name').className = `level-title current-level-text text-${levelClass.split('-')[0]}`;
-                 document.getElementById('next-level-name').textContent = `下一等級：${nextName}`;
+                 
+                 const nextLevelElement = document.getElementById('next-level-name');
+                 if (pointsNeeded > 0) {
+                     nextLevelElement.textContent = `距離${nextName}，還需 ${pointsNeeded} 點`;
+                 } else {
+                     nextLevelElement.textContent = `已達最高等級`;
+                 }
+
                  let nextClass = 'text-lv0'; if(levelClass === 'lv0-style') nextClass = 'text-lv1'; else if(levelClass === 'lv1-style') nextClass = 'text-lv2'; else if(levelClass === 'lv2-style') nextClass = 'text-lv3'; else nextClass = 'text-lv3';
                  document.getElementById('next-level-name').className = `next-level-text ${nextClass}`;
                  document.getElementById('level-progress-bar').style.width = `${progressPercent}%`;
@@ -931,7 +943,8 @@
 
                  coupons.forEach(couponGroup => {
                      for(let i=0; i<couponGroup.qty; i++) {
-                         const uniqueId = `${couponGroup.baseId}_${i}`;
+                         // ★★★ FIX: 加入年份，確保 ID 與 getUnusedCouponCount 一致 ★★★
+                         const uniqueId = `${couponGroup.baseId}_${currentYear}_${i}`;
                          renderCouponItem(uniqueId, couponGroup.name, couponGroup.desc, couponGroup.img, couponGroup.type, listContainer);
                      }
                  });
@@ -1456,12 +1469,13 @@
                 document.getElementById('lookup-button').addEventListener('click', handleAdminLookup);
                 document.getElementById('admin-add-voucher-btn').addEventListener('click', openAddVoucherModal);
                 document.getElementById('admin-redeem-voucher-btn').addEventListener('click', () => openModal(document.getElementById('admin-verify-code-modal')));
-                // 新增派發按鈕綁定 (含動態切換)
+                // 新增派發按鈕綁定
                 const sendCouponBtn = document.getElementById('admin-send-coupon-btn');
                 if(sendCouponBtn) sendCouponBtn.addEventListener('click', () => {
                     document.getElementById('send-coupon-phone').value = '';
                     document.getElementById('send-coupon-type').value = '';
                     document.getElementById('send-coupon-qty').value = '1';
+                    // 顯示/隱藏自訂欄位
                     document.getElementById('custom-coupon-name-group').classList.add('hidden');
                     // 重置 UI
                     document.getElementById('send-target-mode').value = 'phone';
