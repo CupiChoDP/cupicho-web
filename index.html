@@ -1,7 +1,7 @@
 <!-- 
     CupiCho Membership Web App
-    Current Version: v25.04.54
-    Last Updated: 2025/01/07 (Update Voucher History Display Format)
+    Current Version: v25.04.55
+    Last Updated: 2025/01/07 (Update: Cumulative Coupons logic & Level Prefixes)
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -351,7 +351,7 @@
 
     <div id="root-container">
         <div id="login-page">
-            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.54</div></div>
+            <div class="login-container"><img src="https://i.ibb.co/tTZwQCCN/CUPC.jpg" alt="Cupicho Logo" class="logo"><h1 class="title-main">CupiCho DP會員專區</h1><h2 class="title-sub">全球精品巧克力專門店</h2><h3 class="title-store">DreamPlaza門市</h3><div class="input-group"><input type="tel" id="login-phone-input" class="form-input" placeholder="請輸入電話號碼"></div><div class="button-group"><button class="btn btn-primary" id="login-button">會員登入</button><div class="divider"></div><button class="btn btn-secondary" id="register-button">會員註冊</button></div><div class="version-info">v25.04.55</div></div>
         </div>
         <div id="customer-home-page" class="hidden">
             <div class="customer-container">
@@ -395,7 +395,7 @@
                     <p class="info-main-data"><span id="voucher-balance">0</span><span class="small-text">杯</span></p>
                     <div class="action-buttons-group"><button class="btn btn-action" id="voucher-history-btn">寄杯查詢</button></div>
                 </div>
-                <div class="version-info">v25.04.54</div>
+                <div class="version-info">v25.04.55</div>
             </div>
         </div>
         
@@ -658,8 +658,6 @@
         window.openCouponsModal = function() {}; 
         window.openMemberDetailModal = function() {};
         window.closeModal = function(modal) { if(modal) modal.classList.add('hidden'); };
-        
-        // 修正後的頁面切換函式
         window.showPage = function(page) {
             document.querySelectorAll('#login-page, #customer-home-page, #admin-home-page').forEach(p => p.classList.add('hidden'));
             if(page) page.classList.remove('hidden');
@@ -669,7 +667,7 @@
             // =============================================================
             // 2. 變數與常數宣告 (Variables & Constants) - 放在最上面
             // =============================================================
-            const APP_VERSION = 'v25.04.54';
+            const APP_VERSION = 'v25.04.55';
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXK18jBS7tHbIKEd6lovkoi5BG3OM7wxWahw0fvgKSL_pP6OYa6c-4HsFlYdZoG5I/exec";
 
             // ★★★ 新增：年度變數 (用於優惠卷 ID 每年重置) ★★★
@@ -815,22 +813,22 @@
                  const imgMap = { '5%': 'coupon_5.png', '8%': 'coupon_8.png', '10%': 'coupon_10.png', 'americano': 'gift_americano.png', 'bogo': 'gift_bogo.png', 'gold': 'gift_gold.png' };
                  if (levelIdx === 1) { 
                      // Bronze: 3 coupons total
-                     coupons.push({ name: '美式咖啡兌換卷', qty: 1, desc: '晉升禮', img: imgMap['americano'], baseId: 'bronze_amer', type: 'americano' }); 
-                     coupons.push({ name: '5% 回饋優惠卷', qty: 1, desc: '消費回饋', img: imgMap['5%'], baseId: 'bronze_5', type: 'rebate' }); 
-                     coupons.push({ name: '飲品買一送一卷', qty: 1, desc: '有福同享', img: imgMap['bogo'], baseId: 'bronze_bogo', type: 'bogo' }); 
+                     coupons.push({ name: '【銅賞】美式咖啡兌換卷', qty: 1, desc: '晉升禮', img: imgMap['americano'], baseId: 'bronze_amer', type: 'americano' }); 
+                     coupons.push({ name: '【銅賞】5% 回饋優惠卷', qty: 1, desc: '消費回饋', img: imgMap['5%'], baseId: 'bronze_5', type: 'rebate' }); 
+                     coupons.push({ name: '【銅賞】飲品買一送一卷', qty: 1, desc: '有福同享', img: imgMap['bogo'], baseId: 'bronze_bogo', type: 'bogo' }); 
                  }
                  else if (levelIdx === 2) { 
                      // Silver: 5 coupons total
-                     coupons.push({ name: '美式咖啡兌換卷', qty: 1, desc: '晉升禮', img: imgMap['americano'], baseId: 'silver_amer', type: 'americano' }); 
-                     coupons.push({ name: '8% 回饋優惠卷', qty: 2, desc: '消費回饋', img: imgMap['8%'], baseId: 'silver_8', type: 'rebate' }); 
-                     coupons.push({ name: '飲品買一送一卷', qty: 2, desc: '有福同享', img: imgMap['bogo'], baseId: 'silver_bogo', type: 'bogo' }); 
+                     coupons.push({ name: '【銀賞】美式咖啡兌換卷', qty: 1, desc: '晉升禮', img: imgMap['americano'], baseId: 'silver_amer', type: 'americano' }); 
+                     coupons.push({ name: '【銀賞】8% 回饋優惠卷', qty: 2, desc: '消費回饋', img: imgMap['8%'], baseId: 'silver_8', type: 'rebate' }); 
+                     coupons.push({ name: '【銀賞】飲品買一送一卷', qty: 2, desc: '有福同享', img: imgMap['bogo'], baseId: 'silver_bogo', type: 'bogo' }); 
                  }
                  else if (levelIdx === 3) { 
                      // Gold: 10 coupons total
-                     coupons.push({ name: '美式咖啡兌換卷', qty: 1, desc: '晉升禮', img: imgMap['americano'], baseId: 'gold_amer', type: 'americano' }); 
-                     coupons.push({ name: '10% 回饋優惠卷', qty: 3, desc: '消費回饋', img: imgMap['10%'], baseId: 'gold_10', type: 'rebate' }); 
-                     coupons.push({ name: '飲品買一送一卷', qty: 3, desc: '有福同享', img: imgMap['bogo'], baseId: 'gold_bogo', type: 'bogo' }); 
-                     coupons.push({ name: '金賞好禮兌換卷', qty: 3, desc: '專屬好禮', img: imgMap['gold'], baseId: 'gold_gift', type: 'gold' }); 
+                     coupons.push({ name: '【金賞】美式咖啡兌換卷', qty: 1, desc: '晉升禮', img: imgMap['americano'], baseId: 'gold_amer', type: 'americano' }); 
+                     coupons.push({ name: '【金賞】10% 回饋優惠卷', qty: 3, desc: '消費回饋', img: imgMap['10%'], baseId: 'gold_10', type: 'rebate' }); 
+                     coupons.push({ name: '【金賞】飲品買一送一卷', qty: 3, desc: '有福同享', img: imgMap['bogo'], baseId: 'gold_bogo', type: 'bogo' }); 
+                     coupons.push({ name: '【金賞】金賞好禮兌換卷', qty: 3, desc: '專屬好禮', img: imgMap['gold'], baseId: 'gold_gift', type: 'gold' }); 
                  }
                  return coupons;
             }
