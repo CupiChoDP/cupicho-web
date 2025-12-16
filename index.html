@@ -421,6 +421,14 @@
 
         <!-- Modals -->
         <div id="my-coupons-modal" class="modal-overlay hidden">
+        <div id="voucher-history-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal(this.parentElement.parentElement)">&times;</span>
+        <h2 class="modal-title">寄杯查詢</h2>
+        <!-- 這是程式碼正在尋找的關鍵 ID -->
+        <div id="voucher-history-content" class="history-content"></div>
+    </div>
+</div>
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal(document.getElementById('my-coupons-modal'))">&times;</span>
                 <h2 class="modal-title">會員優惠票匣</h2>
