@@ -285,7 +285,7 @@
                     <button class="btn btn-secondary" id="register-button">會員註冊</button>
                 </div>
                 <button id="contact-support-login-btn" class="btn-outline-red">聯繫客服</button>
-                <div class="version-info">v25.10.16</div>
+                <div class="version-info">v25.10.19</div>
             </div>
         </div>
         
@@ -323,7 +323,7 @@
                 </div>
                 
                 <button id="contact-support-btn" class="btn-outline-red">聯繫客服</button>
-                <div class="version-info">v25.10.16</div>
+                <div class="version-info">v25.10.19</div>
             </div> 
         </div>
 
@@ -484,7 +484,7 @@
         <div id="staff-verify-modal" class="modal-overlay hidden"><div class="modal-content"><span class="close-button" onclick="closeModal(document.getElementById('staff-verify-modal'))">&times;</span><h2 class="modal-title" style="margin-top:20px;">請交由店員輸入核銷碼</h2><input type="number" id="staff-code-input" class="form-input" placeholder="請輸入6位核銷碼"><button id="verify-staff-code-btn" class="btn btn-primary" style="margin-top:15px;">確認核銷</button></div></div>
         <div id="register-modal" class="modal-overlay hidden"><div class="modal-content"><span class="close-button" onclick="closeModal(this.parentElement.parentElement)">&times;</span><h2 class="modal-title">會員註冊</h2><div class="form-grid"><div class="form-group"><label for="reg-phone">電話號碼</label><input type="tel" class="form-input" id="reg-phone" placeholder="請輸入10碼電話號碼"></div><div class="form-group"><label for="reg-lastname">姓氏</label><input type="text" class="form-input" id="reg-lastname" placeholder="例如: 王"></div><div class="form-group"><label for="reg-title">稱呼</label><select id="reg-title" class="form-input"><option value="貴賓">貴賓</option><option value="先生">先生</option><option value="小姐">小姐</option></select></div><div class="registration-notice"><p><strong>註冊須知：</strong></p><ol><li>當您註冊Cupicho顧客系統(以下簡稱本系統)時，即代表您同意使用您提供的電話號碼作為註冊依據。</li><li>當您提供電話號碼時，本系統會紀錄您的電話號碼並透過Google Cloud妥善保管。</li><li>若您在本系統有使用寄杯服務，新增、核銷、查詢紀錄，皆會使用您的電話號碼作為依據。</li></ol></div></div><button class="btn btn-primary" id="confirm-reg-button" style="margin-top: 20px;">確認註冊</button></div></div>
 
-        <div id="admin-send-coupon-modal" class="modal-overlay hidden"><div class="modal-content"><span class="close-button" onclick="closeModal(document.getElementById('admin-send-coupon-modal'))">&times;</span><h2 class="modal-title">派發優惠卷</h2><div class="form-grid"><div class="form-group"><label for="send-target-mode">派發對象</label><select id="send-target-mode" class="form-input"><option value="phone">單一會員 (輸入電話)</option><option value="level">會員等級 (批次派發)</option></select></div><div id="target-phone-group" class="form-group"><label for="send-coupon-phone">會員電話</label><input type="tel" id="send-coupon-phone" class="form-input" placeholder="請輸入會員電話"></div><div id="target-level-group" class="form-group hidden"><label for="send-coupon-level">選擇會員等級</label><select id="send-coupon-level" class="form-input"><option value="all">所有會員</option><option value="white">可可白賞</option><option value="bronze">可可銅賞</option><option value="silver">可可銀賞</option><option value="gold">可可金賞</option></select><p style="font-size: 0.8em; color: #c0392b; margin-top: 5px;">注意：批次派發需要處理較多資料，請耐心等待。</p></div><div class="form-group"><label for="send-coupon-type">優惠卷類型</label><select id="send-coupon-type" class="form-input"><option value="">-- 請選擇 --</option><option value="gift_americano">美式咖啡兌換卷</option><option value="gift_bogo">飲品買一送一卷</option><option value="coupon_5">5% 回饋優惠卷</option><option value="coupon_8">8% 回饋優惠卷</option><option value="coupon_10">10% 回饋優惠卷</option><option value="gift_gold">金賞好禮兌換卷</option><option value="other">其他 (自訂名稱)</option></select></div><div id="custom-coupon-name-group" class="form-group hidden"><label for="send-coupon-custom-name">優惠卷名稱</label><input type="text" id="send-coupon-custom-name" class="form-input" placeholder="例如：生日禮、補償卷"></div><div class="form-group"><label for="send-coupon-expiry">有效期限 (選填，預設永久有效)</label><input type="date" id="send-coupon-expiry" class="form-input"></div><div class="form-group"><label for="send-coupon-qty">數量</label><input type="number" id="send-coupon-qty" class="form-input" value="1" min="1" max="10"></div></div><button id="confirm-send-coupon-btn" class="btn btn-primary" style="margin-top:20px;">確認派發</button></div></div>
+        <div id="admin-send-coupon-modal" class="modal-overlay hidden"><div class="modal-content"><span class="close-button" onclick="closeModal(document.getElementById('admin-send-coupon-modal'))">&times;</span><h2 class="modal-title">派發優惠卷</h2><div class="form-grid"><div class="form-group"><label for="send-target-mode">派發對象</label><select id="send-target-mode" class="form-input"><option value="phone">單一會員 (輸入電話)</option><option value="level">會員等級 (批次派發)</option></select></div><div id="target-phone-group" class="form-group"><label for="send-coupon-phone">會員電話</label><input type="tel" id="send-coupon-phone" class="form-input" placeholder="請輸入會員電話"></div><div id="target-level-group" class="form-group hidden"><label for="send-coupon-level">選擇會員等級</label><select id="send-coupon-level" class="form-input"><option value="all">所有會員</option><option value="white">可可白賞</option><option value="bronze">可可銅賞</option><option value="silver">可可銀賞</option><option value="gold">可可金賞</option></select><p style="font-size: 0.8em; color: #c0392b; margin-top: 5px;">注意：批次派發需要處理較多資料，請耐心等待。</p></div><div class="form-group"><label for="send-coupon-type">優惠卷類型</label><select id="send-coupon-type" class="form-input"><option value="">-- 請選擇 --</option><option value="gift_americano">美式咖啡兌換卷</option><option value="gift_bogo">飲品買一送一卷</option><option value="coupon_5">5% 回饋優惠卷</option><option value="coupon_8">8% 回饋優惠卷</option><option value="coupon_10">10% 回饋優惠卷</option><option value="gift_gold">金賞好禮兌換卷</option><option value="other">其他 (自訂名稱)</option></select></div><div id="custom-coupon-name-group" class="form-group hidden"><label for="send-coupon-custom-name">優惠卷名稱</label><input type="text" id="send-coupon-custom-name" class="form-input" placeholder="例如：生日禮、補償卷"></div><div class="form-group"><label for="send-coupon-desc">票卷說明 (選填，將顯示於顧客端)</label><textarea id="send-coupon-desc" class="form-input" rows="3" placeholder="例如：僅限今日使用、需出示身分證..."></textarea></div><div class="form-group"><label for="send-coupon-expiry">有效期限 (選填，預設永久有效)</label><input type="date" id="send-coupon-expiry" class="form-input"></div><div class="form-group"><label for="send-coupon-qty">數量</label><input type="number" id="send-coupon-qty" class="form-input" value="1" min="1" max="10"></div></div><button id="confirm-send-coupon-btn" class="btn btn-primary" style="margin-top:20px;">確認派發</button></div></div>
         <div id="add-voucher-modal" class="modal-overlay hidden"><div class="modal-content"><span class="close-button" onclick="closeModal(this.parentElement.parentElement)">&times;</span><h2 class="modal-title">新增寄杯</h2><div class="form-grid"><div class="form-group"><label for="add-voucher-phone">會員電話號碼</label><input type="tel" id="add-voucher-phone" class="form-input" placeholder="請輸入顧客10碼電話"></div><div class="form-group"><label for="add-voucher-item">寄杯品項</label><select id="add-voucher-item" class="form-input"><option value="">-- 請選擇品項 --</option><optgroup label="咖啡"><option value="咖啡-冰精品美式">冰精品美式</option><option value="咖啡-熱精品美式">熱精品美式</option><option value="咖啡-冰精品拿鐵">冰精品拿鐵</option><option value="咖啡-熱精品拿鐵">熱精品拿鐵</option></optgroup><optgroup label="手沖"><option value="手沖-冰瓜地馬拉">冰瓜地馬拉</option><option value="手沖-熱瓜地馬拉">熱瓜地馬拉</option><option value="手沖-冰哥倫比亞">冰哥倫比亞</option><option value="手沖-熱哥倫比亞">熱哥倫比亞</option><option value="手沖-冰衣索比亞">冰衣索比亞</option><option value="手沖-熱衣索比亞">熱衣索比亞</option></optgroup><optgroup label="純茶"><option value="純茶-冰皇家伯爵紅茶">冰皇家伯爵紅茶</option><option value="純茶-熱皇家伯爵紅茶">熱皇家伯爵紅茶</option><option value="純茶-冰慢焙金烏龍">冰慢焙金烏龍</option><option value="純茶-熱慢焙金烏龍">熱慢焙金烏龍</option></optgroup><optgroup label="風味"><option value="風味-冰特調可可飲">冰特調可可飲</option><option value="風味-熱特調可可飲">熱特調可可飲</option></optgroup></select></div><div class="form-group"><label for="add-voucher-amount">新增數量</label><input type="number" id="add-voucher-amount" class="form-input" placeholder="請輸入杯數" min="1"></div><div class="form-group"><label for="add-voucher-order-id">訂單編號</label><input type="text" id="add-voucher-order-id" class="form-input" placeholder="輸入訂單編號8碼"></div><div class="form-group"><label for="add-voucher-employee-id">員工認證</label><input type="password" id="add-voucher-employee-id" class="form-input" placeholder="請輸入您的員工編號"></div></div><button id="confirm-add-voucher-btn" class="btn btn-primary" style="margin-top:20px;">確認</button></div></div>
         <div id="admin-verify-code-modal" class="modal-overlay hidden"><div class="modal-content"><span class="close-button" onclick="closeModal(this.parentElement.parentElement)">&times;</span><h2 class="modal-title">核銷寄杯</h2><div class="form-group"><label for="admin-redeem-code-input">會員驗證碼</label><input type="number" id="admin-redeem-code-input" class="form-input" placeholder="請輸入會員提供的6位數字"></div><div class="form-group"><label for="admin-redeem-employee-id">員工認證</label><input type="password" id="admin-redeem-employee-id" class="form-input" placeholder="請輸入您的員工編號"></div><button id="verify-redeem-code-btn" class="btn btn-primary" style="margin-top:20px;">驗證</button></div></div>
         <div id="admin-confirm-redeem-modal" class="modal-overlay hidden"><div class="modal-content"><h2 class="modal-title">請確認核銷資訊</h2><div id="admin-confirm-redeem-details" class="confirm-details"></div><div class="confirm-buttons"><button id="cancel-redeem-btn" class="btn btn-secondary">取消</button><button id="final-confirm-redeem-btn" class="btn btn-primary">確認核銷</button></div></div></div>
@@ -499,15 +499,47 @@
         window.onerror = function(msg, url, line) { console.error("系統錯誤:", msg, "Line:", line); };
         
         // Define all functions first (Global Scope)
-        const APP_VERSION = 'v25.10.16';
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwO7gQJ4y_NaTMHbNLWgmjVusyNZo06n8y6jwaZmM_Zc_ZrjuSGgNBMgG-9zba1oXg/exec";
+        const APP_VERSION = 'v25.10.19';
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQkoqhEu98kg1od5x-OYwmvAvIQYdzgtOReANj1MfEn9JntC4_8V6wTmbL9w7Nidw/exec";
         const currentYear = new Date().getFullYear();
         const admins = { '10427091': '7091 Arno', '10431118': '1118 Carol', '10416377': '6377 Eric', '10425120': '5120 Elly', '10431938': '1938 Jewel', '10413569': '3569 Summer', '10426630': '6630 Elaine' };
         const CAN_SEND_COUPON_ADMINS = ['10427091']; 
         const redeemableItems = [{ cost: 2, name: "精品皮革收納籃", image: "item_2pt.png" }, { cost: 3, name: "AMEDEI冰淇淋乙杯", image: "item_3pt.jpg" }, { cost: 6, name: "精品帆布袋", image: "item_6pt.png" }, { cost: 10, name: "精品禮盒", image: "item_10pt.png" }];
         const CUSTOM_COUPON_IMG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="110" height="110" rx="15" ry="15" fill="none" stroke="#DAA520" stroke-width="3"/><text x="50%" y="42" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="#DAA520" font-weight="bold" font-family="'Microsoft JhengHei', 'Heiti TC', sans-serif">專屬</text><text x="50%" y="82" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="#DAA520" font-weight="bold" font-family="'Microsoft JhengHei', 'Heiti TC', sans-serif">優惠</text></svg>`);
         const LEVEL_THRESHOLDS = { LV1: 20, LV2: 40, LV3: 100 };
-        const couponTerms = { 'americano': ['晉升禮'], 'rebate': ['回饋優惠'], 'bogo': ['買一送一'], 'gold': ['金賞禮'], 'other': ['專屬優惠'] }; 
+        
+        // ★★★ 恢復完整條款內容 ★★★
+        const couponTerms = {
+            'americano': [
+                '晉升禮之飲品兌換限精品美式，不限內用/外帶，冰/熱不拘。',
+                '會員晉升禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
+                '其他注意事項及未盡事宜，請洽店內夥伴。',
+                '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
+            ],
+            'rebate': [
+                '排除88折(不含)以下折扣、買一送一、心動價、優惠商品、百貨聯名信用卡提供之折扣及相關集團優惠。',
+                '會員回饋優惠券圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
+                '其他注意事項及未盡事宜，請洽店內夥伴。',
+                '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
+            ],
+            'bogo': [
+                '不得再使用百貨聯名信用卡提供之折扣及相關集團優惠。',
+                '不限內用/外帶，冰/熱不拘。',
+                '會員飲品買一送一兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
+                '其他注意事項及未盡事宜，請洽店內夥伴。',
+                '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。',
+                '此兌換卷恕不參與寄杯活動，需一次領取兩杯飲品。'
+            ],
+            'gold': [
+                '可可金賞會員好禮兌換卷圖片僅供參考，實際商品以門市庫存提供為準，主辦單位保留更換等值商品或調整活動內容之權利，詳情請洽門市人員。',
+                '其他注意事項及未盡事宜，請洽店內夥伴。',
+                '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
+            ],
+            'other': [
+                '此為專屬優惠卷，詳情請洽門市人員。',
+                '處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。'
+            ]
+        };
 
         // Global Variables
         const savedPhone = localStorage.getItem('cupicho_user_phone');
@@ -671,7 +703,10 @@
              const today = new Date(); today.setHours(0,0,0,0);
              let itemsToShow = [];
              levelCoupons.forEach(group => { for(let i=0; i<group.qty; i++) { const id = `${group.baseId}_${currentYear}_${i}`; const isUsed = globalUsedCoupons.includes(id); let status = isUsed ? 'used' : 'unused'; if (status === currentCouponTab) itemsToShow.push({ id, name: group.name, desc: "無使用期限", img: group.img, type: group.type, status }); } });
-             globalExtraCoupons.forEach(c => { const isUsed = globalUsedCoupons.includes(c.id); let isExpired = false; if(c.expiry) { if(new Date(c.expiry) < today) isExpired = true; } let status = 'unused'; if(isUsed) status = 'used'; else if(isExpired) status = 'expired'; if (status === currentCouponTab) { let imgMap = { 'gift_americano': 'gift_americano.png', 'gift_bogo': 'gift_bogo.png', 'coupon_5': 'coupon_5.png', 'coupon_8': 'coupon_8.png', 'coupon_10': 'coupon_10.png', 'gift_gold': 'gift_gold.png' }; let nameMap = { 'gift_americano': '美式咖啡兌換卷', 'gift_bogo': '飲品買一送一卷', 'coupon_5': '5% 回饋優惠卷', 'coupon_8': '8% 回饋優惠卷', 'coupon_10': '10% 回饋優惠卷', 'gift_gold': '金賞好禮兌換卷' }; let typeMap = { 'gift_americano': 'americano', 'gift_bogo': 'bogo', 'coupon_5': 'rebate', 'coupon_8': 'rebate', 'coupon_10': 'rebate', 'gift_gold': 'gold' }; let dateText = '無使用期限'; if (c.expiry) dateText = `有效期限: ${String(c.expiry).split('T')[0]}`; let displayItem = { id: c.id, type: typeMap[c.type] || 'gold', img: imgMap[c.type] || 'gift_gold.png', name: nameMap[c.type] || '專屬優惠卷', desc: dateText, status: status }; if (c.type.startsWith('other:')) { displayItem.name = c.type.split(':')[1]; displayItem.type = 'other'; displayItem.img = CUSTOM_COUPON_IMG; } itemsToShow.push(displayItem); } });
+             globalExtraCoupons.forEach(c => { const isUsed = globalUsedCoupons.includes(c.id); let isExpired = false; if(c.expiry) { if(new Date(c.expiry) < today) isExpired = true; } let status = 'unused'; if(isUsed) status = 'used'; else if(isExpired) status = 'expired'; if (status === currentCouponTab) { let imgMap = { 'gift_americano': 'gift_americano.png', 'gift_bogo': 'gift_bogo.png', 'coupon_5': 'coupon_5.png', 'coupon_8': 'coupon_8.png', 'coupon_10': 'coupon_10.png', 'gift_gold': 'gift_gold.png' }; let nameMap = { 'gift_americano': '美式咖啡兌換卷', 'gift_bogo': '飲品買一送一卷', 'coupon_5': '5% 回饋優惠卷', 'coupon_8': '8% 回饋優惠卷', 'coupon_10': '10% 回饋優惠卷', 'gift_gold': '金賞好禮兌換卷' }; let typeMap = { 'gift_americano': 'americano', 'gift_bogo': 'bogo', 'coupon_5': 'rebate', 'coupon_8': 'rebate', 'coupon_10': 'rebate', 'gift_gold': 'gold' }; let dateText = '無使用期限'; if (c.expiry) dateText = `有效期限: ${String(c.expiry).split('T')[0]}`; let displayItem = { id: c.id, type: typeMap[c.type] || 'gold', img: imgMap[c.type] || 'gift_gold.png', name: nameMap[c.type] || '專屬優惠卷', desc: dateText, status: status }; 
+             if (c.description) displayItem.description = c.description;
+
+             if (c.type.startsWith('other:')) { displayItem.name = c.type.split(':')[1]; displayItem.type = 'other'; displayItem.img = CUSTOM_COUPON_IMG; } itemsToShow.push(displayItem); } });
              if (itemsToShow.length === 0) listContainer.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">此分類目前沒有優惠卷</p>';
              else itemsToShow.forEach(item => renderCouponItem(item, listContainer));
         }
@@ -682,26 +717,55 @@
              if (item.status === 'used') { btnText = '已使用'; btnClass += ' disabled'; disabledAttr = 'disabled'; styleAttr = 'background-color:#ccc; cursor:default;'; } 
              else if (item.status === 'expired') { btnText = '已過期'; btnClass += ' disabled'; disabledAttr = 'disabled'; styleAttr = 'background-color:#ccc; cursor:default;'; }
              div.innerHTML = `<div class="coupon-img-container"><img src="${item.img}" class="coupon-img"></div><div class="coupon-details"><span class="coupon-name">${item.name}</span><span class="coupon-desc">${item.desc}</span></div><div class="coupon-action"><button class="${btnClass}" ${disabledAttr} style="${styleAttr}" data-id="${item.id}" data-name="${item.name}" data-img="${item.img}" data-type="${item.type}">${btnText}</button></div>`;
+             
+             if (item.description) {
+                div.querySelector('button').setAttribute('data-description', item.description);
+             }
+             
              container.appendChild(div);
              if(item.status === 'unused') {
-                 div.querySelector('button').addEventListener('click', () => {
-                     pendingCouponUseId = item.id;
-                     document.getElementById('confirm-coupon-img').src = item.img;
-                     const terms = couponTerms[item.type] || [];
+                 div.querySelector('button').addEventListener('click', (e) => {
+                     const btn = e.target;
+                     pendingCouponUseId = btn.getAttribute('data-id');
+                     const cType = btn.getAttribute('data-type');
+                     const cImg = btn.getAttribute('data-img');
+                     const cDesc = btn.getAttribute('data-description'); 
+
+                     document.getElementById('confirm-coupon-img').src = cImg;
+                     
                      let termsHtml = '<ul>';
-                     terms.forEach((term) => { termsHtml += (term.includes('處於「已使用」') || term.includes('此兌換卷恕不參與寄杯活動')) ? `<li style="color:#c0392b; font-weight:bold; font-size:1.15em;">${term}</li>` : `<li>${term}</li>`; });
-                     document.getElementById('confirm-coupon-terms').innerHTML = termsHtml + '</ul>';
-                     closeModal(document.getElementById('my-coupons-modal')); openModal(document.getElementById('coupon-confirm-modal'));
+                     
+                     const baseTerms = couponTerms[cType] || [];
+                     baseTerms.forEach(term => {
+                         if (!term.includes('處於「已使用」')) {
+                             termsHtml += `<li>${term}</li>`;
+                         }
+                     });
+
+                     if (cDesc && cDesc !== 'undefined') {
+                         termsHtml += `<li style="color:#000; font-weight:bold; margin-top:5px;">特別說明：${cDesc}</li>`;
+                     }
+
+                     termsHtml += '</ul>';
+
+                     termsHtml += `
+                        <p style="color:#c0392b; font-weight:bold; font-size:1.1em; margin-top:15px; border-top:1px dashed #ddd; padding-top:10px;">
+                            處於「已使用」狀態的卷類無法再次使用（因顧客誤按而變為「已使用」狀態的卷類也無法再次使用）。
+                        </p>
+                     `;
+
+                     document.getElementById('confirm-coupon-terms').innerHTML = termsHtml;
+                     closeModal(document.getElementById('my-coupons-modal')); 
+                     openModal(document.getElementById('coupon-confirm-modal'));
                  });
              }
         }
 
-        // ★★★ 核心修正：寄杯資料處理與分頁呈現 (Admin 自動隱藏 Tabs) ★★★
         function fetchAndShowVoucherHistory(phone, nameInfo, role) {
              if (!phone) { alert('無法取得會員電話'); return; }
              const page = document.getElementById('voucher-history-page');
              const contentEl = document.getElementById('voucher-list-container');
-             const tabsHeader = page.querySelector('.tabs-header'); // 抓取分頁標頭
+             const tabsHeader = page.querySelector('.tabs-header'); 
              if (!page || !contentEl) return; 
 
              showLoader();
@@ -715,12 +779,10 @@
                  globalVoucherData.summary = result.data.summary || {};
                  
                  if (role === 'admin') {
-                     // ★ 員工視角：隱藏分頁，強制顯示歷史 ★
                      if(tabsHeader) tabsHeader.style.display = 'none';
                      currentVoucherTab = 'history';
                      renderVoucherList(nameInfo, role);
                  } else {
-                     // ★ 顧客視角：顯示分頁，預設可兌換 ★
                      if(tabsHeader) tabsHeader.style.display = 'flex';
                      currentVoucherTab = 'available';
                      updateVoucherTabUI();
@@ -747,7 +809,6 @@
             const container = document.getElementById('voucher-list-container');
             container.innerHTML = '';
             
-            // 顧客看 Available
             if (currentVoucherTab === 'available') {
                 let hasItems = false;
                 for (const [item, count] of Object.entries(globalVoucherData.summary)) {
@@ -772,10 +833,8 @@
                 if (!hasItems) container.innerHTML = '<p style="text-align:center; color:#999; margin-top:30px;">目前沒有可兌換的寄杯。</p>';
 
             } else {
-                // Admin 或 History 模式
                 const history = globalVoucherData.history.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 
-                // Admin 標題優化
                 if (role === 'admin') {
                     container.innerHTML = '<h3 style="color:#6d4c41; margin-bottom:15px; font-size:1.1em;">詳細寄杯與核銷紀錄</h3>';
                 }
@@ -805,7 +864,7 @@
             }
         }
 
-        // 獨立出的核銷點擊邏輯
+        // ★★★ 補回：核銷點擊邏輯 ★★★
         function handleVoucherRedeemClick(item, maxAmount, phone, nameInfo) {
              const amount = prompt(`您要核銷幾杯「${item}」？\n(此品項還剩下 ${maxAmount} 杯可核銷)`, 1);
              if (amount && parseInt(amount) > 0 && parseInt(amount) <= maxAmount) {
@@ -814,7 +873,7 @@
                      method: 'POST', 
                      body: JSON.stringify({ 
                          action: 'generateRedeemCode', 
-                         phone: currentCustomerPhone, // 使用全域變數確保正確
+                         phone: currentCustomerPhone, 
                          item, 
                          amount, 
                          lastName: currentCustomerInfo.lastName, 
@@ -850,7 +909,6 @@
                         if(currentCustomerPhone) { fetch(`${SCRIPT_URL}?action=query&phone=${currentCustomerPhone}`).then(r=>r.json()).then(result => { if(result.found) { document.getElementById('voucher-balance').textContent = result.data.vouchers; document.getElementById('points-balance').textContent = result.data.points; } }); }
                         setTimeout(() => { 
                             closeModal(document.getElementById('show-code-modal')); 
-                            // 核銷成功後重新整理當前分頁
                             if(!document.getElementById('voucher-history-page').classList.contains('hidden')) {
                                 fetchAndShowVoucherHistory(currentCustomerPhone, currentCustomerInfo, 'customer');
                             }
@@ -903,7 +961,6 @@
         }
 
         function openContactSupportPage() {
-            // ★★★ 修正邏輯：如果已有登入資訊 (currentCustomerPhone)，則自動填入並強制鎖定 ★★★
             if(currentCustomerPhone) {
                 const nameText = (currentCustomerInfo.lastName || '') + (currentCustomerInfo.title || '');
                 const phoneInput = document.getElementById('support-phone');
@@ -912,18 +969,15 @@
                 phoneInput.value = currentCustomerPhone;
                 nameInput.value = nameText;
                 
-                // 雙重鎖定：disabled + readonly
                 phoneInput.disabled = true;
                 phoneInput.readOnly = true;
                 
                 nameInput.disabled = true;
                 nameInput.readOnly = true;
                 
-                // JS 強制設定屬性
                 phoneInput.setAttribute('disabled', 'disabled');
                 nameInput.setAttribute('disabled', 'disabled');
             } else {
-                // 從登入頁面進來的 (未登入)，完全解鎖
                 const phoneInput = document.getElementById('support-phone');
                 const nameInput = document.getElementById('support-name');
 
@@ -959,21 +1013,174 @@
                 hideLoader();
                 if(res.status === 'success') { 
                     alert("✅ 您的反應已送出，客服將儘速與您聯繫！"); 
-                    // Redirect back based on login status
                     if(currentCustomerPhone) showPage(document.getElementById('customer-home-page'));
                     else showPage(document.getElementById('login-page'));
                 } else alert("⚠️ 送出失敗，請稍後再試。");
             }).catch(err => { hideLoader(); alert("連線錯誤"); });
         }
 
-        function handleStaffConfirmPointRedeem() { if(!pendingPointRedeemItem) return; showLoader(); fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'directRedeemPoints', phone: currentCustomerPhone, item: pendingPointRedeemItem.name, amount: pendingPointRedeemItem.cost }) }).then(r => r.json()).then(res => { hideLoader(); if (res.status === 'success') { alert('✅ 兌換成功！'); document.getElementById('points-balance').textContent = res.newPoints; document.getElementById('page-current-points').textContent = res.newPoints; updateMemberLevelUI(res.annualPoints); closeModal(document.getElementById('point-redeem-confirm-modal')); } else { alert('⚠️ 兌換失敗：' + res.message); } }).catch(err => { hideLoader(); alert('連線錯誤'); }); }
-        function handleVerifyStaffCodeForCoupon() { const inputCode = document.getElementById('staff-code-input').value; if (inputCode === '287719' && pendingCouponUseId) { showLoader(); fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'redeemCoupon', phone: currentCustomerPhone, couponId: pendingCouponUseId, title: '優惠卷核銷' }) }).then(r => r.json()).then(res => { hideLoader(); if (res.status === 'success') { globalUsedCoupons.push(pendingCouponUseId); alert('核銷成功！'); closeModal(document.getElementById('staff-verify-modal')); updateMemberLevelUI(currentAnnualPoints); openCouponsModal(); } else { alert('核銷失敗'); } }).catch(err => { hideLoader(); alert('連線錯誤'); }); } else { alert('核銷碼錯誤'); } }
+        // ★★★ 補回：處理派發優惠卷 ★★★
+        function handleAdminSendCoupon() { 
+            const phone = document.getElementById('send-coupon-phone').value.trim(); 
+            const typeSelect = document.getElementById('send-coupon-type'); 
+            let type = typeSelect.value; 
+            const qty = parseInt(document.getElementById('send-coupon-qty').value); 
+            const targetMode = document.getElementById('send-target-mode').value; 
+            const expiryInput = document.getElementById('send-coupon-expiry').value; 
+            const desc = document.getElementById('send-coupon-desc').value.trim(); 
+
+            if (type === 'other') { 
+                const customName = document.getElementById('send-coupon-custom-name').value.trim(); 
+                if (!customName) { alert('請輸入優惠卷名稱'); return; } 
+                type = `other:${customName}`; 
+            } 
+            
+            let payload = { action: 'sendCoupon', type, qty, employeeId: currentAdminId, targetMode, expiry: expiryInput, desc: desc }; 
+            
+            if (targetMode === 'phone') { 
+                if (!phone || !/^\d{10}$/.test(phone)) { alert('請輸入正確電話'); return; } 
+                payload.phone = phone; 
+            } else { 
+                payload.level = document.getElementById('send-coupon-level').value; 
+            } 
+            
+            if (!type || !qty) { alert('請填寫完整'); return; } 
+            if (targetMode === 'level' && !confirm(`確定要派發給「${document.getElementById('send-coupon-level').selectedOptions[0].text}」嗎？`)) return; 
+            
+            showLoader(); 
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) }).then(r => r.json()).then(res => { 
+                hideLoader(); 
+                if(res.status === 'success') { 
+                    alert('✅ 派發成功！'); 
+                    closeModal(document.getElementById('admin-send-coupon-modal')); 
+                } else { 
+                    alert('⚠️ 派發失敗：' + res.message); 
+                } 
+            }).catch(() => { hideLoader(); alert('連線錯誤'); }); 
+        }
+
+        // ★★★ 補回：核銷優惠卷 (員工驗證) ★★★
+        function handleVerifyStaffCodeForCoupon() { 
+            const inputCode = document.getElementById('staff-code-input').value; 
+            if (inputCode === '287719' && pendingCouponUseId) { 
+                showLoader(); 
+                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'redeemCoupon', phone: currentCustomerPhone, couponId: pendingCouponUseId, title: '優惠卷核銷' }) })
+                .then(r => r.json())
+                .then(res => { 
+                    hideLoader(); 
+                    if (res.status === 'success') { 
+                        globalUsedCoupons.push(pendingCouponUseId); 
+                        alert('核銷成功！'); 
+                        closeModal(document.getElementById('staff-verify-modal')); 
+                        updateMemberLevelUI(currentAnnualPoints); 
+                        openCouponsModal(); 
+                    } else { 
+                        alert('核銷失敗'); 
+                    } 
+                }).catch(err => { hideLoader(); alert('連線錯誤'); }); 
+            } else { 
+                alert('核銷碼錯誤'); 
+            } 
+        }
+
+        // ★★★ 補回：處理最終核銷寄杯 (確認) ★★★
+        function handleFinalConfirmRedeem() { 
+            const employeeId = document.getElementById('admin-redeem-employee-id').value; 
+            showLoader(); 
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'processRedemption', step: 'confirm', code: verificationCode, employeeId }) })
+            .then(r => r.json())
+            .then(result => { 
+                hideLoader(); 
+                if(result.status === 'success') { 
+                    alert('核銷成功'); 
+                    closeModal(document.getElementById('admin-confirm-redeem-modal')); 
+                    if(searchedPhone) handleAdminLookup(); 
+                } else { 
+                    alert('核銷失敗'); 
+                } 
+            }).catch(() => { hideLoader(); alert('連線錯誤'); }); 
+        }
+
+        // ★★★ 補回：處理新增寄杯 (確認) ★★★
+        function handleFinalAddVoucher() { 
+            showLoader(); 
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(pendingAddVoucherData) })
+            .then(r => r.json())
+            .then(res => { 
+                hideLoader(); 
+                closeModal(document.getElementById('admin-confirm-add-modal')); 
+                if(res.status==='success') { 
+                    alert('新增成功'); 
+                    if(searchedPhone && searchedPhone.phone === pendingAddVoucherData.phone) { 
+                        handleAdminLookup(); 
+                    } 
+                } else alert('新增失敗'); 
+                pendingAddVoucherData = null; 
+            }).catch(() => { hideLoader(); alert('連線錯誤'); }); 
+        }
+
+        // ★★★ 補回：處理點數兌換 (員工確認) ★★★
+        function handleStaffConfirmPointRedeem() { 
+            if(!pendingPointRedeemItem) return; 
+            showLoader(); 
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'directRedeemPoints', phone: currentCustomerPhone, item: pendingPointRedeemItem.name, amount: pendingPointRedeemItem.cost }) })
+            .then(r => r.json())
+            .then(res => { 
+                hideLoader(); 
+                if (res.status === 'success') { 
+                    alert('✅ 兌換成功！'); 
+                    document.getElementById('points-balance').textContent = res.newPoints; 
+                    document.getElementById('page-current-points').textContent = res.newPoints; 
+                    updateMemberLevelUI(res.annualPoints); 
+                    closeModal(document.getElementById('point-redeem-confirm-modal')); 
+                } else { 
+                    alert('⚠️ 兌換失敗：' + res.message); 
+                } 
+            }).catch(err => { hideLoader(); alert('連線錯誤'); }); 
+        }
+
+        // ★★★ 補回：驗證核銷碼 (第一步) ★★★
+        function handleVerifyRedeemCode() { 
+            const code = document.getElementById('admin-redeem-code-input').value; 
+            const employeeId = document.getElementById('admin-redeem-employee-id').value; 
+            if (!code || !employeeId) { alert('請輸入完整資訊'); return; } 
+            showLoader(); 
+            fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'processRedemption', step: 'verify', code, employeeId }) })
+            .then(r => r.json())
+            .then(result => { 
+                hideLoader(); 
+                if(result.status === 'success') { 
+                    const data = result.data; 
+                    document.getElementById('admin-confirm-redeem-details').innerHTML = `<p>會員: ${data.customerName}</p><p>品項: ${data.item}</p><p>數量: ${data.amount}</p>`; 
+                    verificationCode = code; 
+                    closeModal(document.getElementById('admin-verify-code-modal')); 
+                    openModal(document.getElementById('admin-confirm-redeem-modal')); 
+                } else { 
+                    alert('驗證失敗'); 
+                } 
+            }).catch(() => { hideLoader(); alert('連線錯誤'); }); 
+        }
+
+        // ★★★ 補回：確認新增寄杯 (第一步) ★★★
+        function handleConfirmAddVoucher() { 
+            const phone = document.getElementById('add-voucher-phone').value.trim(); 
+            const item = document.getElementById('add-voucher-item').value; 
+            const amount = document.getElementById('add-voucher-amount').value; 
+            const orderId = document.getElementById('add-voucher-order-id').value.trim(); 
+            const employeeId = document.getElementById('add-voucher-employee-id').value; 
+            if (!/^\d{10}$/.test(phone) || !item || !amount || !orderId || !employeeId) { alert('請填寫完整資訊'); return; } 
+            pendingAddVoucherData = { action: 'addVoucher', phone, item, amount, orderId, employeeId }; 
+            document.getElementById('admin-confirm-add-details').innerHTML = `<p>會員: ${phone}</p><p>品項: ${item}</p><p>數量: ${amount}</p>`; 
+            closeModal(document.getElementById('add-voucher-modal')); 
+            openModal(document.getElementById('admin-confirm-add-modal')); 
+        }
+
+        // ★★★ 補回：QR Code 掃描器 ★★★
         function openQRScanner() { 
             console.log("嘗試開啟 QR Scanner...");
             const qrContainer = document.getElementById('qr-reader-container'); 
             if(!qrContainer) { alert("系統錯誤: 找不到掃描視窗"); return; }
             
-            // 先顯示黑底，避免初始化失敗時沒反應
             qrContainer.classList.remove('hidden'); 
 
             if (!html5QrCodeScanner) { 
@@ -1009,14 +1216,54 @@
             }); 
         }
         
-        function closeQRScanner() { const qrContainer = document.getElementById('qr-reader-container'); if (html5QrCodeScanner) { html5QrCodeScanner.stop().then(() => { qrContainer.classList.add('hidden'); }).catch(() => { qrContainer.classList.add('hidden'); }); } else { qrContainer.classList.add('hidden'); } }
-        function handleAdminLookup() { const phone = document.getElementById('lookup-phone-input').value.trim(); if (!/^\d{10}$/.test(phone)) { alert('電話號碼格式錯誤'); return; } showLoader(); fetch(`${SCRIPT_URL}?action=query&phone=${phone}`).then(r => r.json()).then(result => { hideLoader(); if (result.status === 'success') { if (result.found) { searchedPhone = result.data; document.getElementById('result-name-display').textContent = `${result.data.lastName}${result.data.title}`; const ap = parseInt(result.data.annualPoints) || 0; let levelName = '可可白賞'; if (ap >= LEVEL_THRESHOLDS.LV3) levelName = '可可金賞'; else if (ap >= LEVEL_THRESHOLDS.LV2) levelName = '可可銀賞'; else if (ap >= LEVEL_THRESHOLDS.LV1) levelName = '可可銅賞'; document.getElementById('result-level-display').textContent = levelName; document.getElementById('result-points').textContent = result.data.points; document.getElementById('result-vouchers').textContent = result.data.vouchers; document.getElementById('lookup-results').classList.remove('hidden'); } else { searchedPhone = null; document.getElementById('lookup-results').classList.add('hidden'); alert('查無此會員資料。'); } } else { searchedPhone = null; alert('系統錯誤'); } }).catch(err => { hideLoader(); alert('連線錯誤'); }); }
-        function openAddVoucherModal() { const phoneInput = document.getElementById('add-voucher-phone'); if (searchedPhone && searchedPhone.phone) phoneInput.value = searchedPhone.phone; else phoneInput.value = ''; document.getElementById('add-voucher-item').value = ''; document.getElementById('add-voucher-amount').value = ''; document.getElementById('add-voucher-order-id').value = ''; document.getElementById('add-voucher-employee-id').value = ''; openModal(document.getElementById('add-voucher-modal')); }
-        function handleConfirmAddVoucher() { const phone = document.getElementById('add-voucher-phone').value.trim(); const item = document.getElementById('add-voucher-item').value; const amount = document.getElementById('add-voucher-amount').value; const orderId = document.getElementById('add-voucher-order-id').value.trim(); const employeeId = document.getElementById('add-voucher-employee-id').value; if (!/^\d{10}$/.test(phone) || !item || !amount || !orderId || !employeeId) { alert('請填寫完整資訊'); return; } pendingAddVoucherData = { action: 'addVoucher', phone, item, amount, orderId, employeeId }; document.getElementById('admin-confirm-add-details').innerHTML = `<p>會員: ${phone}</p><p>品項: ${item}</p><p>數量: ${amount}</p>`; closeModal(document.getElementById('add-voucher-modal')); openModal(document.getElementById('admin-confirm-add-modal')); }
-        function handleFinalAddVoucher() { showLoader(); fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(pendingAddVoucherData) }).then(r => r.json()).then(res => { hideLoader(); closeModal(document.getElementById('admin-confirm-add-modal')); if(res.status==='success') { alert('新增成功'); if(searchedPhone && searchedPhone.phone === pendingAddVoucherData.phone) { handleAdminLookup(); } } else alert('新增失敗'); pendingAddVoucherData = null; }).catch(() => { hideLoader(); alert('連線錯誤'); }); }
-        function handleVerifyRedeemCode() { const code = document.getElementById('admin-redeem-code-input').value; const employeeId = document.getElementById('admin-redeem-employee-id').value; if (!code || !employeeId) { alert('請輸入完整資訊'); return; } showLoader(); fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'processRedemption', step: 'verify', code, employeeId }) }).then(r => r.json()).then(result => { hideLoader(); if(result.status === 'success') { const data = result.data; document.getElementById('admin-confirm-redeem-details').innerHTML = `<p>會員: ${data.customerName}</p><p>品項: ${data.item}</p><p>數量: ${data.amount}</p>`; verificationCode = code; closeModal(document.getElementById('admin-verify-code-modal')); openModal(document.getElementById('admin-confirm-redeem-modal')); } else { alert('驗證失敗'); } }).catch(() => { hideLoader(); alert('連線錯誤'); }); }
-        function handleFinalConfirmRedeem() { const employeeId = document.getElementById('admin-redeem-employee-id').value; showLoader(); fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'processRedemption', step: 'confirm', code: verificationCode, employeeId }) }).then(r => r.json()).then(result => { hideLoader(); if(result.status === 'success') { alert('核銷成功'); closeModal(document.getElementById('admin-confirm-redeem-modal')); if(searchedPhone) handleAdminLookup(); } else { alert('核銷失敗'); } }).catch(() => { hideLoader(); alert('連線錯誤'); }); }
-        function handleAdminSendCoupon() { const phone = document.getElementById('send-coupon-phone').value.trim(); const typeSelect = document.getElementById('send-coupon-type'); let type = typeSelect.value; const qty = parseInt(document.getElementById('send-coupon-qty').value); const targetMode = document.getElementById('send-target-mode').value; const expiryInput = document.getElementById('send-coupon-expiry').value; if (type === 'other') { const customName = document.getElementById('send-coupon-custom-name').value.trim(); if (!customName) { alert('請輸入優惠卷名稱'); return; } type = `other:${customName}`; } let payload = { action: 'sendCoupon', type, qty, employeeId: currentAdminId, targetMode, expiry: expiryInput }; if (targetMode === 'phone') { if (!phone || !/^\d{10}$/.test(phone)) { alert('請輸入正確電話'); return; } payload.phone = phone; } else { payload.level = document.getElementById('send-coupon-level').value; } if (!type || !qty) { alert('請填寫完整'); return; } if (targetMode === 'level' && !confirm(`確定要派發給「${document.getElementById('send-coupon-level').selectedOptions[0].text}」嗎？`)) return; showLoader(); fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) }).then(r => r.json()).then(res => { hideLoader(); if(res.status === 'success') { alert('✅ 派發成功！'); closeModal(document.getElementById('admin-send-coupon-modal')); } else { alert('⚠️ 派發失敗：' + res.message); } }).catch(() => { hideLoader(); alert('連線錯誤'); }); }
+        function closeQRScanner() { 
+            const qrContainer = document.getElementById('qr-reader-container'); 
+            if (html5QrCodeScanner) { 
+                html5QrCodeScanner.stop().then(() => { qrContainer.classList.add('hidden'); }).catch(() => { qrContainer.classList.add('hidden'); }); 
+            } else { 
+                qrContainer.classList.add('hidden'); 
+            } 
+        }
+
+        // ★★★ 補回：員工查詢會員 ★★★
+        function handleAdminLookup() { 
+            const phone = document.getElementById('lookup-phone-input').value.trim(); 
+            if (!/^\d{10}$/.test(phone)) { alert('電話號碼格式錯誤'); return; } 
+            showLoader(); 
+            fetch(`${SCRIPT_URL}?action=query&phone=${phone}`).then(r => r.json()).then(result => { 
+                hideLoader(); 
+                if (result.status === 'success') { 
+                    if (result.found) { 
+                        searchedPhone = result.data; 
+                        document.getElementById('result-name-display').textContent = `${result.data.lastName}${result.data.title}`; 
+                        const ap = parseInt(result.data.annualPoints) || 0; 
+                        let levelName = '可可白賞'; if (ap >= LEVEL_THRESHOLDS.LV3) levelName = '可可金賞'; else if (ap >= LEVEL_THRESHOLDS.LV2) levelName = '可可銀賞'; else if (ap >= LEVEL_THRESHOLDS.LV1) levelName = '可可銅賞'; 
+                        document.getElementById('result-level-display').textContent = levelName; 
+                        document.getElementById('result-points').textContent = result.data.points; 
+                        document.getElementById('result-vouchers').textContent = result.data.vouchers; 
+                        document.getElementById('lookup-results').classList.remove('hidden'); 
+                    } else { 
+                        searchedPhone = null; 
+                        document.getElementById('lookup-results').classList.add('hidden'); 
+                        alert('查無此會員資料。'); 
+                    } 
+                } else { 
+                    searchedPhone = null; 
+                    alert('系統錯誤'); 
+                } 
+            }).catch(err => { hideLoader(); alert('連線錯誤'); }); 
+        }
+
+        // ★★★ 補回：開啟新增寄杯視窗 ★★★
+        function openAddVoucherModal() { 
+            const phoneInput = document.getElementById('add-voucher-phone'); 
+            if (searchedPhone && searchedPhone.phone) phoneInput.value = searchedPhone.phone; else phoneInput.value = ''; 
+            document.getElementById('add-voucher-item').value = ''; 
+            document.getElementById('add-voucher-amount').value = ''; 
+            document.getElementById('add-voucher-order-id').value = ''; 
+            document.getElementById('add-voucher-employee-id').value = ''; 
+            openModal(document.getElementById('add-voucher-modal')); 
+        }
 
         // --- Event Listeners (Bottom) ---
         // 確保所有 DOM 元素都載入完成後再綁定事件
@@ -1027,7 +1274,7 @@
             safeBindListener('back-from-voucher-history', 'click', goBackToHome);
             safeBindListener('back-from-points-history', 'click', goBackToHome);
             safeBindListener('back-from-redeem-points', 'click', goBackToHome);
-            safeBindListener('back-from-contact-support', 'click', goBackToHome); // Back from support page
+            safeBindListener('back-from-contact-support', 'click', goBackToHome); 
 
             safeBindListener('login-button', 'click', handleLogin);
             safeBindListener('register-button', 'click', () => { document.getElementById('reg-phone').value=''; openModal(document.getElementById('register-modal')); });
@@ -1038,9 +1285,8 @@
             safeBindListener('points-history-btn', 'click', () => fetchAndShowPointsHistory(currentCustomerPhone));
             safeBindListener('voucher-history-btn', 'click', () => fetchAndShowVoucherHistory(currentCustomerPhone, currentCustomerInfo, 'customer'));
             
-            // ★★★ Bind BOTH support buttons ★★★
-            safeBindListener('contact-support-btn', 'click', openContactSupportPage); // Home page button
-            safeBindListener('contact-support-login-btn', 'click', openContactSupportPage); // Login page button
+            safeBindListener('contact-support-btn', 'click', openContactSupportPage); 
+            safeBindListener('contact-support-login-btn', 'click', openContactSupportPage); 
             
             safeBindListener('send-support-btn', 'click', handleSendSupportRequest);
 
@@ -1051,6 +1297,7 @@
             safeBindListener('admin-send-coupon-btn', 'click', () => {
                 document.getElementById('send-coupon-phone').value = ''; document.getElementById('send-coupon-type').value = ''; document.getElementById('send-coupon-qty').value = '1'; document.getElementById('send-coupon-expiry').value = ''; 
                 document.getElementById('custom-coupon-name-group').classList.add('hidden'); document.getElementById('send-target-mode').value = 'phone'; document.getElementById('target-phone-group').classList.remove('hidden'); document.getElementById('target-level-group').classList.add('hidden');
+                document.getElementById('send-coupon-desc').value = ''; // 清空說明欄位
                 openModal(document.getElementById('admin-send-coupon-modal'));
             });
             safeBindListener('confirm-send-coupon-btn', 'click', handleAdminSendCoupon);
@@ -1074,14 +1321,12 @@
             
             document.querySelectorAll('.tab-btn').forEach(btn => { 
                 btn.addEventListener('click', (e) => { 
-                    // 判斷是否為寄杯分頁 (tab-btn for vouchers)
                     if (btn.hasAttribute('data-vtab')) {
                         document.querySelectorAll('.tab-btn[data-vtab]').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         currentVoucherTab = btn.getAttribute('data-vtab');
-                        renderVoucherList(currentCustomerInfo, 'customer'); // 這裡確保用 customer 邏輯，admin 不會看到這個按鈕
+                        renderVoucherList(currentCustomerInfo, 'customer');
                     } else {
-                        // 這是優惠卷分頁
                         document.querySelectorAll('.tab-btn:not([data-vtab])').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         currentCouponTab = btn.getAttribute('data-tab');
