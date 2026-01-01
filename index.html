@@ -139,7 +139,7 @@
 
         .admin-actions { display: flex; gap: 15px; }
         
-        /* ★★★ 寄杯紀錄樣式 (卡片列表) ★★★ */
+        /* ★★★ 寄杯紀錄卡片 (三行設計) ★★★ */
         .voucher-card {
             background-color: #fff;
             border: 1px solid #e0e0e0;
@@ -157,9 +157,22 @@
         .voucher-count { font-size: 0.9em; color: #666; }
         .voucher-count strong { color: #4a2c2a; font-size: 1.2em; }
         
-        /* ★★★ 點數紀錄樣式 (新版 v26.01.10) ★★★ */
-        /* 一般(已獲得)樣式：兩行式 */
-        .history-item { display: flex; flex-direction: column; padding: 15px 5px; border-bottom: 1px solid #f0f0f0; text-align: left; }
+        /* ★★★ 點數紀錄/寄杯歷史 列表樣式 ★★★ */
+        /* 容器 */
+        .history-item { 
+            display: flex; 
+            flex-direction: column; /* 預設垂直排列 */
+            padding: 15px 5px; 
+            border-bottom: 1px solid #f0f0f0; 
+            text-align: left; 
+        }
+
+        /* 寄杯紀錄: 強制三行樣式 */
+        .h-line-1 { font-size: 1.1em; font-weight: bold; color: #333; margin-bottom: 4px; }
+        .h-line-2 { font-size: 0.85em; color: #666; margin-bottom: 2px; }
+        .h-line-3 { font-size: 0.8em; color: #999; }
+
+        /* 點數紀錄: 兩行樣式 */
         .history-title-row { font-size: 1.1em; font-weight: bold; color: #333; margin-bottom: 6px; }
         .history-meta-row { display: flex; justify-content: space-between; align-items: flex-end; }
         .history-date-info { font-size: 0.85em; color: #888; line-height: 1.4; }
@@ -167,7 +180,7 @@
         .val-plus { color: #27ae60; }
         .val-minus { color: #c0392b; }
 
-        /* ★★★ 已使用 (核銷) 樣式：簡單單行左右對齊 ★★★ */
+        /* 點數紀錄: 已使用 (單行左右對齊) */
         .history-item.simple-row { flex-direction: row; justify-content: space-between; align-items: center; }
         .history-item.simple-row .left { display: flex; flex-direction: column; }
         .history-item.simple-row .title { font-size: 1.1em; font-weight: bold; color: #333; }
@@ -236,6 +249,51 @@
         .info-box { display: flex; gap: 15px; margin-top: 15px; }
         .info-column { flex: 1; background-color: #f9f9f9; border: 1px solid #eee; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
         .info-column .btn-action { width: 100%; margin-top: 10px; }
+        
+        .voucher-card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+        }
+        .voucher-info {
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .voucher-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #f5f2eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #6a1d7b;
+        }
+        .voucher-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .voucher-count {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .voucher-count strong {
+            color: #4a2c2a;
+            font-size: 1.2em;
+        }
+        
     </style>
 </head>
 <body>
@@ -254,12 +312,12 @@
             <div class="news-label">門市優惠快報</div>
             <div class="news-content">
                 <div class="news-list">
-                    <div class="news-item">可可銅賞以上會員，最高享10%回饋</div>
+                    <div class="news-item">可可金賞會員享10%回饋！</div>
                     <div class="news-item">uniopen聯名卡天天享5%折扣，平日再加碼5%</div>
                     <div class="news-item">1/1-1/31推薦朋友加入門市官方帳號，</div>
                     <div class="news-item">雙方都可以領到美式兌換卷</div>
                     <div class="news-item">12/26-1/5 BOXING DAY</div>
-                    <div class="news-item">可可銅賞以上會員，最高享10%回饋</div> 
+                    <div class="news-item">可可金賞會員享10%回饋！</div> 
                 </div>
             </div>
         </div>
@@ -500,7 +558,7 @@
         
         // Define all functions first (Global Scope)
         const APP_VERSION = 'v26.01.10';
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQCy9ej3nsilcx2YI_2XjCLoccmrq7QqiJ0KYN1CMw4CNuLnNaSlY5ELJSebJFnAw/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQHRdPr2DgV2cWAsPYP4DDDdlovwBJA_SyV6ojSZSLXU3ExgC2R4eWleJTnP8DE2c/exec";
         const currentYear = new Date().getFullYear();
         // const admins = { ... }; // 已移除，改由後端驗證
         
@@ -545,8 +603,8 @@
         let html5QrCodeScanner = null, currentCouponTab = 'unused';
         let countdownInterval = null, currentAdminId = null;
         
-        let currentPointsTab = 'earned'; 
-        let globalPointsHistory = [];    
+        let currentPointsTab = 'earned'; // 新增點數紀錄分頁變數
+        let globalPointsHistory = [];    // 儲存點數紀錄資料
         let currentVoucherTab = 'available';
         let globalVoucherData = { summary: {}, history: [] };
 
@@ -785,10 +843,12 @@
                  globalVoucherData.summary = result.data.summary || {};
                  
                  if (role === 'admin') {
+                     // ★ 員工視角：隱藏分頁，強制顯示歷史 ★
                      if(tabsHeader) tabsHeader.style.display = 'none';
                      currentVoucherTab = 'history';
                      renderVoucherList(nameInfo, role);
                  } else {
+                     // ★ 顧客視角：顯示分頁，預設可兌換 ★
                      if(tabsHeader) tabsHeader.style.display = 'flex';
                      currentVoucherTab = 'available';
                      updateVoucherTabUI();
@@ -815,6 +875,7 @@
             const container = document.getElementById('voucher-list-container');
             container.innerHTML = '';
             
+            // 顧客看 Available
             if (currentVoucherTab === 'available') {
                 let hasItems = false;
                 for (const [item, count] of Object.entries(globalVoucherData.summary)) {
@@ -842,6 +903,7 @@
                 // Admin 或 History 模式
                 const history = globalVoucherData.history.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 
+                // Admin 標題優化
                 if (role === 'admin') {
                     container.innerHTML = '<h3 style="color:#6d4c41; margin-bottom:15px; font-size:1.1em;">詳細寄杯與核銷紀錄</h3>';
                 }
@@ -855,24 +917,26 @@
                         const div = document.createElement('div');
                         div.className = 'history-item';
                         
-                        // ★★★ 新增：訂單編號與員工姓名解析 ★★★
-                        // ★★★ 修正：因為前端沒有 admins 清單，這裡直接顯示 log.employeeId (員工編號)
-                        const empDisplay = log.employeeId; 
+                        // ★★★ 訂單編號與員工姓名解析 (強制三行) ★★★
+                        // 注意：若後端有回傳 name 則顯示 name，否則顯示 ID (因安全設定前端已無名單)
+                        const empDisplay = log.employeeName || log.employeeId; 
                         const orderId = log.orderId || '-'; 
                         const footerInfo = `${orderId} / ${empDisplay}`;
                         
                         let actionColor = log.action === '新增' ? '#27ae60' : '#c0392b';
                         
+                        // ★★★ 強制三行 HTML 結構 ★★★
                         div.innerHTML = `
-                            <div class="history-info">
-                                <span class="history-detail">${log.item}</span>
-                                <span class="history-meta">${logDate}</span>
-                                <span class="history-meta" style="font-size: 0.85em; color: #888; margin-top: 2px;">${footerInfo}</span>
-                            </div>
-                            <div class="history-action-group">
-                                <span style="font-weight:bold; color:${actionColor};">${log.action} ${log.amount} 杯</span>
+                            <div class="h-line-1">${log.item}</div>
+                            <div class="h-line-2">${logDate}</div>
+                            <div class="h-line-3">${footerInfo}</div>
+                            <div class="history-action-group" style="position:absolute; right:10px; top:50%; transform:translateY(-50%);">
+                                <span style="font-weight:bold; color:${actionColor}; font-size:1.2em;">${log.action} ${log.amount} 杯</span>
                             </div>
                         `;
+                        // 修正：因為用了 absolute positioning，父層要 relative
+                        div.style.position = 'relative';
+                        
                         container.appendChild(div);
                     });
                 }
@@ -933,7 +997,7 @@
             }, 3000);
         }
         
-        // ★★★ 核心補丁：確保 openRedeemPointsPage 存在 ★★★
+        // ★★★ 補回遺失的 openRedeemPointsPage ★★★
         function openRedeemPointsPage() { 
             const page = document.getElementById('redeem-points-page'); showLoader(); 
             fetch(`${SCRIPT_URL}?action=query&phone=${currentCustomerPhone}`).then(r => r.json()).then(result => { 
@@ -954,21 +1018,25 @@
             }).catch(err => { hideLoader(); alert('🚫 網路或伺服器錯誤'); }); 
         }
 
-        // ★★★ 核心補丁：fetchAndShowPointsHistory (含到期日與分頁邏輯) ★★★
+        // ★★★ 核心邏輯：點數紀錄列表呈現 (含分頁) ★★★
         function fetchAndShowPointsHistory(phone) { 
              if (!phone) { alert('無法取得會員電話'); return; } 
              const page = document.getElementById('points-history-page'); const contentEl = document.getElementById('points-history-content');
              if (!page || !contentEl) return; showLoader(); 
              
+             // 呼叫後端 API
              fetch(`${SCRIPT_URL}?action=getPointsHistory&phone=${phone}`)
              .then(r => r.json())
              .then(result => { 
                 hideLoader(); 
                 if (result.status === 'success') { 
-                    globalPointsHistory = result.data; 
+                    globalPointsHistory = result.data; // 儲存資料供切換
+                    
+                    // 預設顯示「已獲得」
                     currentPointsTab = 'earned';
                     updatePointsTabUI();
                     renderPointsList('earned');
+                    
                     showPage(page); 
                 } else alert('⚠️ ' + (result.message || '查詢失敗')); 
             }).catch(err => { hideLoader(); alert('🚫 網路或伺服器錯誤'); }); 
@@ -993,12 +1061,15 @@
             let filteredData = [];
             
             if (tab === 'earned') {
+                // 已獲得: 所有 type='in'
                 filteredData = globalPointsHistory.filter(item => item.type === 'in');
             } else if (tab === 'expiring') {
+                // 即將到期: type='in' 且 remaining > 0 且 到期日在30天內
                 filteredData = globalPointsHistory.filter(item => {
                     return item.type === 'in' && item.remaining > 0 && item.rawExpiry && item.rawExpiry <= monthLater && item.rawExpiry >= now;
                 });
             } else if (tab === 'used') {
+                // 已使用: type='out'
                 filteredData = globalPointsHistory.filter(item => item.type === 'out');
             }
             
@@ -1016,8 +1087,7 @@
                     div.innerHTML = `
                         <div class="left">
                             <div class="title">${log.title}</div>
-                            <div class="date">${log.dateStr}</div>
-                        </div>
+                            </div>
                         <div class="right points-minus">${log.points} 點</div>
                     `;
                 } else {
@@ -1100,7 +1170,7 @@
             }).catch(err => { hideLoader(); alert("連線錯誤"); });
         }
 
-        // ★★★ 核心補丁：補回 handleStaffConfirmPointRedeem 函式 ★★★
+        // ★★★ 補回遺失的 handleStaffConfirmPointRedeem ★★★
         function handleStaffConfirmPointRedeem() { 
             if(!pendingPointRedeemItem) return; 
             showLoader(); 
